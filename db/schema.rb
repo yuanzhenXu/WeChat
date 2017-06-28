@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20170628094805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "open_users", force: :cascade do |t|
+    t.string "name", comment: "用户昵称"
+    t.string "wechat_num", comment: "微信号"
+    t.string "operate", comment: "移除操作"
+    t.datetime "focused_at", comment: "关注时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "nickname"
+    t.string "groupid"
+    t.string "openid"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

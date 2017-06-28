@@ -1,6 +1,24 @@
 # More option see https://github.com/Eric-Guo/wechat#menu-create
 button:
  -
-  type: "view"
-  name: "Testing"
-  url:  "http://xxxxx.proxy.qqbrowser.cc"
+  name: "测试"
+  sub_button:
+   -
+    type: "click"
+    name: "Testing"
+    key: "bangding_click"
+   -
+    type: "view"
+    name: "关于"
+    url: "http://baidu.com"
+ -
+   name: "查看"
+   sub_button:
+    -
+     type: "click"
+     name: "进入"
+     key: "bangding_in"
+    -
+     type: "click"
+     name: "必看"
+     key: "bangding_about"

@@ -1,15 +1,15 @@
 default: &default
-  corpid: "corpid"
-  corpsecret: "corpsecret"
-  agentid:  1
+#  corpid: "corpid"
+#  corpsecret: "corpsecret"
+#  agentid:  1
 # Or if using public account, only need above two line
   appid: "wxbe0340edbe6d3316"
   secret: "c803758db02c441a19f546107348602a"
-  token:    "my_token"
-  access_token: "C:/Users/[xuyuanzhen]/wechat_access_token"
+  token:    "my"
+  access_token: "/Users/xuyuanzhen/works/wechat/tmp/wechat_access_token"
   encrypt_mode: false # if true must fill encoding_aes_key
   encoding_aes_key:  "my_encoding_aes_key"
-  jsapi_ticket: "C:/Users/[xuyuanzhen]/wechat_jsapi_ticket"
+  jsapi_ticket: "/Users/xuyuanzhen/works/wechat/tmp/wechat_jsapi_ticket"
 
 production:
   corpid:     <%= ENV['WECHAT_CORPID'] %>
@@ -29,7 +29,7 @@ production:
 
 development:
   <<: *default
-  trusted_domain_fullname: "http://your_dev.proxy.qqbrowser.cc"
+  trusted_domain_fullname: "http://by4vag.natappfree.cc/wechat"
 
 test:
   <<: *default

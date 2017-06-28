@@ -1,15 +1,24 @@
 class WechatsController < ApplicationController
   # For details on the DSL available within this file, see https://github.com/Eric-Guo/wechat#wechat_responder---rails-responder-controller-dsl
-  wechat_responder
 
-  #默认文字信息
-  on :text do |request, content|
-    request.reply.text "echo: #{content}" # Just echo
+  layout 'wechat'
+  wechat_responder
+  def apply_new
+    wechat_oauth2 do |userid|
+      @current_user = User.find_by(wechat_userid: userid)
+      @apply = Apply.new
+      @apply.user_id = @current_user.id
+    end
   end
 
-  # 当请求文字信息内容为'help'时，使用这个'responder'处理，并将n作为第二个参数
-  on :text, with 'help' do |request|
-    request.reply.text 'help content' #恢复帮助你的消息
+  # 默认文字信息responder
+  on :text do |request, content|
+    request.reply.text "echo: #{content}" #Just echo
+  end
+
+  # 当请求的文字信息内容为'help'时, 使用这个responder处理
+  on :text, with: 'help' do |request|
+    request.reply.text 'help content' #回复帮助信息
   end
 
   # 当请求的文字信息内容为'<n>条新闻'时, 使用这个responder处理, 并将n作为第二个参数
@@ -43,6 +52,18 @@ class WechatsController < ApplicationController
     end
   end
 
+  # 企业号收到EventKey 为二维码扫描结果事件时
+  on :scan, with: 'BINDING_QR_CODE' do |request, scan_result, scan_type|
+    request.reply.text "User #{request[:FromUserName]} ScanResult #{scan_result} ScanType #{scan_type}"
+  end
+
+  # 企业号收到EventKey 为CODE 39码扫描结果事件时
+  on :scan, with: 'BINDING_BARCODE' do |message, scan_result|
+    if scan_result.start_with? 'CODE_39,'
+      message.reply.text "User: #{message[:FromUserName]} scan barcode, result is #{scan_result.split(',')[1]}"
+    end
+  end
+
   # 当用户点击菜单时
   on :click, with: 'BOOK_LUNCH' do |request, key|
     request.reply.text "User: #{request[:FromUserName]} click #{key}"
@@ -54,20 +75,23 @@ class WechatsController < ApplicationController
   end
 
   # 处理图片信息
+  # 直接将图片返回给用户
   on :image do |request|
-    request.reply.image(request[:MediaId]) #直接将图片返回给用户
+    request.reply.image(request[:MediaId])
   end
 
   # 处理语音信息
+  # 直接语音音返回给用户
   on :voice do |request|
-    request.reply.voice(request[:MediaId]) #直接语音音返回给用户
+    request.reply.voice(request[:MediaId])
   end
 
   # 处理视频信息
+  # 调用 api 获得发送者的nickname
+  # 直接视频返回给用户
   on :video do |request|
-    nickname = wechat.user(request[:FromUserName])['nickname'] #调用 api 获得发送者的nickname
-    request.reply.video(request[:MediaId], title: '回声',
-                        description: "#{nickname}发来的视频请求") #直接视频返回给用户
+    nickname = wechat.user(request[:FromUserName])['nickname']
+    request.reply.video(request[:MediaId], title: '回声', description: "#{nickname}发来的视频请求")
   end
 
   # 处理地理位置消息
@@ -118,12 +142,11 @@ class WechatsController < ApplicationController
 
   # 当无任何responder处理用户信息时,使用这个responder处理
   on :fallback, respond: 'fallback message'
-
-  template = YAML.load(File.read(template_yaml_path))
-  Wechat.api.template_message_send Wechat::Message.to(openid).template(template['template'])
-
-  ActiveSupport::Notifications.subscribe('wechat.responder.after_create') do |name, started, finished, unique_id, data|
-    WechatLog.create request: data[:request], response: data[:response]
-  end
+  # template = YAML.load(File.read(template_yaml_path))
+  # Wechat.api.template_message_send Wechat::Message.to(openid).template(template['template'])
+  #
+  # ActiveSupport::Notifications.subscribe('wechat.responder.after_create') do |name, started, finished, unique_id, data|
+  #   WechatLog.create request: data[:request], response: data[:response]
+  # end
 
 end

@@ -1,0 +1,2 @@
+class UserWechatTag < ApplicationRecord
+end

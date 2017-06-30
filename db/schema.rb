@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628094805) do
+ActiveRecord::Schema.define(version: 20170629085903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "open_users", force: :cascade do |t|
-    t.string "name", comment: "用户昵称"
-    t.string "wechat_num", comment: "微信号"
-    t.string "operate", comment: "移除操作"
-    t.datetime "focused_at", comment: "关注时间"
+  create_table "user_wechat_tags", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "wechat_tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_wechat_tags_on_user_id"
+    t.index ["wechat_tag_id"], name: "index_user_wechat_tags_on_wechat_tag_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,6 +29,22 @@ ActiveRecord::Schema.define(version: 20170628094805) do
     t.string "groupid"
     t.string "openid"
     t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "wechat_tag"
+  end
+
+  create_table "wechat_sessions", force: :cascade do |t|
+    t.string "openid", null: false
+    t.string "hash_store"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["openid"], name: "index_wechat_sessions_on_openid", unique: true
+  end
+
+  create_table "wechat_tags", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

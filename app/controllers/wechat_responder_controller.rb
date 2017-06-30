@@ -1,0 +1,2 @@
+class WechatResponderController < ApplicationController
+end

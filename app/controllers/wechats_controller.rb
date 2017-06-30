@@ -1,8 +1,8 @@
 class WechatsController < ApplicationController
   # For details on the DSL available within this file, see https://github.com/Eric-Guo/wechat#wechat_responder---rails-responder-controller-dsl
-
   layout 'wechat'
   wechat_responder
+
   def apply_new
     wechat_oauth2 do |userid|
       @current_user = User.find_by(wechat_userid: userid)
@@ -13,7 +13,7 @@ class WechatsController < ApplicationController
 
   # 默认文字信息responder
   on :text do |request, content|
-    request.reply.text "echo: #{content}" #Just echo
+    request.reply.text "#{content}" #Just echo
   end
 
   # 当请求的文字信息内容为'help'时, 使用这个responder处理
@@ -141,7 +141,7 @@ class WechatsController < ApplicationController
   end
 
   # 当无任何responder处理用户信息时,使用这个responder处理
-  on :fallback, respond: 'fallback message'
+  on :fallback, respond: '欢迎你'
   # template = YAML.load(File.read(template_yaml_path))
   # Wechat.api.template_message_send Wechat::Message.to(openid).template(template['template'])
   #
@@ -149,4 +149,14 @@ class WechatsController < ApplicationController
   #   WechatLog.create request: data[:request], response: data[:response]
   # end
 
+  # 获取用户的name,wechat_nums
+  def fetch_user(openid)
+    user = User.find(openid)
+    user.attribute = {
+        name: user.name,
+        wechat_num: user.wechat_num
+    }
+    user.save
+
+  end
 end

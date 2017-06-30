@@ -1,0 +1,3 @@
+class WechatSupportsController < ApplicationController
+
+end

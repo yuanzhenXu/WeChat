@@ -1,2 +1,3 @@
-h1 User#index
-p Find me in app/views/user/index.html.slim
+h1 All users
+- @users.each do |user|
+  = render @users

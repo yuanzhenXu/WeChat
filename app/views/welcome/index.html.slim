@@ -1,3 +1,27 @@
-h1 Welcome to wechat
-p Find me in app/views/welcome/index.html.slim
-p = link_to "GO", user_index_path
+body
+  header.navbar.navbar-fixed-top.navbar-inverse
+    .container
+      nav
+        ul.nav.navbar-nav.navbar-left
+          li = link_to "welcome", root_path, id: "logo"
+        ul.nav.navbar-nav.navbar-right
+          li
+            a> href='https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index' About
+          li = link_to "Sign up now", signup_path
+          /li= link_to "Home"
+          /li= link_to "Help"
+          - if logged_in?
+            li= link_to "Users", users_path
+            li.dropdown
+              a.dropdown-toggle data-toggle="dropdown" href="#"
+                | Account
+                b.caret
+              ul.dropdown-menu
+                li= link_to "Profile", current_user
+                li= link_to "Settings", edit_user_path(current_user)
+                li.divider
+                li
+                  = link_to "Log out", logout_path, method: "delete"
+          - else
+
+            li= link_to "Log in" , login_path

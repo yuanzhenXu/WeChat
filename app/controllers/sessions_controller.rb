@@ -1,8 +1,28 @@
 class SessionsController < ApplicationController
-  def create
-    @user = fetch_user(auth_hash)
-    login_in @user
 
+  def new
+
+  end
+
+  def create
+    user = User.find_by(email: params[:session][:email].downcase)
+    if user&&user.authenticate(params[:session][:password_digest])
+      log_in user
+      redirect_to user
+    else
+      render 'new'
+    end
+  end
+
+  # def create
+  #   @user = fetch_user(auth_hash)
+  #   login_in @user
+  #
+  # end
+
+  def destroy
+    log_out
+    redirect_to root_url
   end
 
   protected

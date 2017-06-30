@@ -1,0 +1,10 @@
+.row
+  .col-md-6.col-md-offset-5
+    .form-group
+      = simple_form_for(:session , url: login_path) do |f|
+        = f.input :email, class:'form-control'
+        = f.input :password_digest, class: 'form-control'
+        = f.button :submit, "login", class: 'btn btn-primary'
+
+    p New user?
+    = link_to "sign up", signup_path, class: 'btn btn-primary'

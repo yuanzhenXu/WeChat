@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  validates :name, presence: true
-  validates :wechat_num, presence: true
+  validates :nickname, presence: true
+  validates :email, presence: true
+  validates :password_digest, presence: true
 
   def self.find_or_initilize_via_wechat(openid)
     user = self.where(openid).first

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630021625) do
+ActiveRecord::Schema.define(version: 20170630094854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170630021625) do
     t.string "password_digest"
     t.string "mobile"
     t.string "email"
+    t.string "headimageurl"
   end
 
   create_table "wechat_sessions", force: :cascade do |t|

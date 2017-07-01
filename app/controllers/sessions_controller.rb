@@ -32,12 +32,11 @@ class SessionsController < ApplicationController
 
 
   def fetch_user(_hash)
-    openid = _hash['openid']
+    openid = _hash['extra']['raw_info']['openid']
     user = User.find_or_initilize_via_wechat(openid)
     user.attribute = {
-        nickename: _hash['nickname'],
-        email: _hash['email']
+        nickename: _hash['extra']['raw_info']['nickname'],
+        headimageurl: _hash['extra']['raw_info']['headimageurl']
     }
-
   end
 end

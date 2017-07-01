@@ -149,14 +149,15 @@ class WechatsController < ApplicationController
   #   WechatLog.create request: data[:request], response: data[:response]
   # end
 
-  # 获取用户的nickname,email
+  # 获取用户的nickname,headimageurl
   def fetch_user(openid)
     _hash = wechat.user(openid)
     user = User.find_or_initilize_via_wechat(openid)
     user.attribute = {
         nickname: _hash['nickename'].presence || user.nickname,
-        email: _hash['email'].presence || user.email
+        headimageurl: _hash['headimageurl'].presence || user.headimageurl
     }
     user.save!
+    return user
   end
 end

@@ -25,11 +25,21 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
+  def auth_callback
+    @title = '微信登录，结果页'
+    auth_hash = request.env['omniauth.auth']
+    @info = auth_hash
+
+    openid = auth_hash.fetch('extra').fetch('raw_info').fetch("openid") rescue ''
+    user_info = auth_hash.fetch('extra').fetch('raw_info')
+
+    redirect_to "http://yourserver"
+  end
+
   protected
   def auth_hash
     request.env['omniauth.auth']
   end
-
 
   def fetch_user(_hash)
     openid = _hash['extra']['raw_info']['openid']

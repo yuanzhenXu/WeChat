@@ -3,10 +3,27 @@ html
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     title Wechat
-    = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
+    = wechat_config_js debug: false, api: %w(onMenuShareTimeline onMenuShareAppMessage chooseImage previewImage uploadImage downloadImage hideMenuItems closeWindow scanQRCode)
+    = csrf_meta_tags
   body
     - flash.each do |message|
       = message
     = yield
+    /= yield :javascript_include_tag
+    footer
+      /= current_user
+      /= share_uri
+      = render 'shared_logs/share'
+      = render 'welcome/footer'
+    /  /- if current_user.points.registered.blank?
+    /  /  = render 'wechat/base/new_user_dialog'
+    /  /  = current_user.add_registered_point
+
+    - if flash[:alert] || flash[:notice]
+      javascript:
+          $(document).ready(function () {
+              createAlert("#{flash[:alert] || flash[:notice]}", {title: ''});
+          });

@@ -1,0 +1,37 @@
+doctype html
+html lang="zh-CN"
+  head
+    meta charset="utf-8"
+    meta content="template language" name="keywords"
+    meta content="author" name="author"
+    meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" name="viewport"
+    meta content="yes" name="mobile-web-app-capable"
+    meta content="yes" name="apple-mobile-web-app-capable"
+    meta content="telephone=no" name="format-detection"
+    meta content="email=no" name="format-detection"
+    meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"
+
+    title wechat
+
+    = stylesheet_link_tag 'wechat'
+    = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
+    = javascript_include_tag 'wechat'
+
+    = csrf_meta_tags
+    -#= render 'layouts/baidu_tongji'
+
+  body class=controller_name id="#{controller_name}_#{action_name}"
+    = yield
+    /= hidden_field_tag :current_signature, current_signature
+
+    footer
+      = render 'welcome/footer'
+      /- if current_user.points.registered.blank?
+      /  = render 'wechat/base/new_user_dialog'
+      /  = current_user.add_registered_point
+
+      - if flash[:alert] || flash[:notice]
+        javascript:
+            $(document).ready(function(){
+                createAlert("#{flash[:alert] || flash[:notice]}", {title: ''});
+            });

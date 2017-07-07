@@ -1,15 +1,18 @@
 class UsersController < ApplicationController
+  wechat_api
 
   def new
     @user = User.new
-
   end
+
   def index
-    @user = User.all
+    @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
+    # @user = @current_user
+    # @wechat_tag = @user.wechat_tag.find_by(params[:id])
   end
 
   def create
@@ -19,12 +22,15 @@ class UsersController < ApplicationController
       flash[:ontice] = "注册成功"
       redirect_to @user
     else
+      flash[:alert] = "注册失败"
       render 'new'
     end
   end
 
+  # 给用户添加标签
   def edit
     @user = User.find(params[:id])
+    # @user.wechat_tag = wechat_tag
   end
 
   def update
@@ -45,8 +51,9 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+
   private
   def user_params
-    params.require(:user).permit(:nickname,:password_digest, :email)
+    params.require(:user).permit(:nickname, :password_digest, :email, :wechat_tag)
   end
 end

@@ -1,0 +1,21 @@
+@import "font-awesome-sprockets";
+@import 'font-awesome';
+// NOTICE: Here do not use bootstra-sass from the gemfile, since it's sass, will load later than css(style.css)
+@import 'admin/plugins/inspinia/bootstrap';
+@import 'admin/plugins/inspinia/animate';
+@import 'admin/plugins/inspinia/style';
+@import 'admin/plugins/blueimp-gallery';
+@import 'admin/plugins/umeditor';
+@import 'admin/plugins/bootstrap-editable';
+//@import 'admin/umeditor_custom';
+//@import 'jquery-ui/core';
+@import 'jquery-ui/theme';
+@import 'jquery-ui/menu';
+@import 'jquery-ui/datepicker';
+@import 'jquery-ui/autocomplete';
+@import 'select2';
+@import 'multi-select';
+@import 'admin/common';
+//@import 'admin/products';
+//@import 'admin/orders';
+//@import 'admin/shelves';

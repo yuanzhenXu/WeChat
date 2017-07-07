@@ -1,24 +1,33 @@
 # More option see https://github.com/Eric-Guo/wechat#menu-create
+#button:
+# -
+#  name: "测试"
+#  sub_button:
+#   -
+#    type: "click"
+#    name: "Testing"
+#    key: "bangding_click"
+#   -
+#    type: "view"
+#    name: "关于"
+#    url: "http://fwhjsz.natappfree.cc"
+# -
+#   name: "查看"
+#   sub_button:
+#    -
+#     type: "click"
+#     name: "进入"
+#     key: "bangding_in"
+#    -
+#     type: "click"
+#     name: "必看"
+#     key: "bangding_about"
 button:
- -
-  name: "测试"
-  sub_button:
-   -
-    type: "click"
-    name: "Testing"
-    key: "bangding_click"
-   -
-    type: "view"
-    name: "关于"
-    url: "http://382pxm.natappfree.cc/"
- -
-   name: "查看"
-   sub_button:
-    -
-     type: "click"
-     name: "进入"
-     key: "bangding_in"
-    -
-     type: "click"
-     name: "必看"
-     key: "bangding_about"
+  -
+    type: view
+    name: wechat
+    url: "http://chkx65.natappfree.cc"
+  -
+    type: view
+    name: 个人中心
+    url: "http://chkx65.natappfree.cc/current_user"

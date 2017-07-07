@@ -1,0 +1,21 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-8
+    /h2= t("admin.#{controller_name}")
+    ol.breadcrumb
+      li= link_to '首页', admin_root_path
+      - if action_name == 'index'
+        li.active= "列表"
+      - else
+        li= link_to "列表", controller: controller_name, action: :index
+        /li.active
+        /  - if %w(new create edit update show).include?(action_name)
+        /    = t("#{action_name}")
+        /  - else
+        /    = t("admin.#{controller_name}.#{action_name}")
+  /.col-lg-4
+  /  .title-action
+  /    - if action_name == 'index'
+  /      - if have_new_btn?
+  /        = link_to t('new'), {controller: controller_name, action: :new}, class: 'btn btn-sm btn-primary'
+  /    - else
+  /      = link_to t('back'), {controller: controller_name, action: :index}, class: 'btn btn-sm btn-primary'

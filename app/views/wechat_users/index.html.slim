@@ -1,0 +1,22 @@
+h1.row.col-md-4.col-md-offset-5  WechatUsers
+= render 'common/header'
+small= "Total: #{WechatUser.count}"
+table.table.table-striped
+  tr
+    th ID
+    /th Nickname
+    th openid
+    th subscribe_at
+    th event
+    th colspan='2'handle
+    /th
+  - @wechat_users.each do |user|
+    tr
+      td= user.id
+      /td= user.nickname
+      td= user.openid
+      td= user.subscribe_at.localtime.strftime("%Y年%m月%d日 %H:%M")
+      td= "subscribe"
+      td= link_to 'edit', edit_wechat_user_path(user)
+      td= link_to 'destroy', user, method: :delete, data: {confirm: 'are you sure?'}
+

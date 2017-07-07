@@ -29,7 +29,7 @@ production:
 
 development:
   <<: *default
-  trusted_domain_fullname: "http://382pxm.natappfree.cc/wechat"
+  trusted_domain_fullname: "http://chkx65.natappfree.cc"
 
 test:
   <<: *default

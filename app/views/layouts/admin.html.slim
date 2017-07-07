@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    meta charset='utf-8'
+    meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"
+    meta name="renderer" content="webkit"
+    meta http-equiv="cleartype" content="on"
+    meta name="HandheldFriendly" content="True"
+    meta name="MobileOptimized" content="320"
+    - if content_for?(:title)
+      = yield(:title)
+    - else
+      title= "wechat"
+    = csrf_meta_tags
+    = action_cable_meta_tag
+    = content_for?(:head) ? yield(:head) : ''
+    = stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
+    = wechat_config_js debug: false, api: %w(onMenuShareTimeline onMenuShareAppMessage chooseImage previewImage uploadImage downloadImage hideMenuItems closeWindow scanQRCode)
+  / = favicon_link_tag "favicon.png"
+  body class="admin_gray_bg" id="admin_#{controller_name}_#{action_name}"
+    header
+      = yield :header
+    #wrapper
+      = render 'admin/base/navbar'
+      #page-wrapper
+        = render 'admin/base/navbar_header'
+        = render 'admin/base/flash'
+        = yield
+    footer
+      = yield :footer
+
+    - if flash[:alert] || flash[:notice]
+      javascript:
+          $(document).ready(function () {
+              createAlert("#{flash[:alert] || flash[:notice]}", {title: ''});
+          });

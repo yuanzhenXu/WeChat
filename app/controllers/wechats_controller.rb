@@ -1,5 +1,6 @@
 class WechatsController < ApplicationController
   # For details on the DSL available within this file, see https://github.com/Eric-Guo/wechat#wechat_responder---rails-responder-controller-dsl
+  # wechat_api
   layout 'wechat'
   wechat_responder
 
@@ -11,6 +12,18 @@ class WechatsController < ApplicationController
     end
   end
 
+  #邀请成员关注
+  # def inivite_user(user)
+  #   @user = Wechat.api.invite_user(user.id)
+  # end
+  #
+  # #给用户发消息
+  # def send_message(openid, message)
+  #   @user.openid = Wechat.api.user(openid)
+  #   # message = Wechat.api.message_send(@user.openid,message)
+  #   # render message
+  # end
+
   # 默认文字信息responder
   on :text do |request, content|
     request.reply.text "#{content}" #Just echo
@@ -18,6 +31,7 @@ class WechatsController < ApplicationController
 
   # 当请求的文字信息内容为'help'时, 使用这个responder处理
   on :text, with: 'help' do |request|
+    # p "***#{Wechat.api.users}********"
     request.reply.text 'help content' #回复帮助信息
   end
 
@@ -32,9 +46,38 @@ class WechatsController < ApplicationController
 
   # 当用户加关注
   on :event, with: 'subscribe' do |request|
-    request.reply.text "User #{request[:FromUserName]} subscribe now"
+    # request.reply.text "User #{request[:FromUserName]} subscribe now"
+    if WechatUser.exist?(openid:request[:FromUserName])
+      @wechat_user.openid = request[:FromUserName]
+      @wechat_user.event = 'subscribe'
+      @wechat_user.subscribe_at = Time.now
+      @wechat_user.save!
+    else
+      @wechat_user = WechatUser.new
+      @wechat_user.openid = request[:FromUserName]
+      @wechat_user.event = 'subscribe'
+      @wechat_user.subscribe_at = Time.now
+      @wechat_user.save!
+    end
+    request.reply.news([welcome_message]) do |article, n, index|
+      article.item title: n[:title], description: nil, pic_url: n[:pic_url], url: n[:url]
+    end
+
+    p '#######'
+    p request
+
   end
 
+
+  def welcome_message
+    {
+     :title => "欢迎你",
+     :content => "未完待续..........",
+     :pic_url => "",
+     :url => root_url
+
+    }
+  end
   # 公众号收到未关注用户扫描qrscene_xxxxxx二维码时。注意此次扫描事件将不再引发上条的用户加关注事件
   on :scan, with: 'qrscene_xxxxxx' do |request, ticket|
     request.reply.text "Unsubscribe user #{request[:FromUserName]} Ticket #{ticket}"
@@ -52,27 +95,6 @@ class WechatsController < ApplicationController
     end
   end
 
-  # 企业号收到EventKey 为二维码扫描结果事件时
-  on :scan, with: 'BINDING_QR_CODE' do |request, scan_result, scan_type|
-    request.reply.text "User #{request[:FromUserName]} ScanResult #{scan_result} ScanType #{scan_type}"
-  end
-
-  # 企业号收到EventKey 为CODE 39码扫描结果事件时
-  on :scan, with: 'BINDING_BARCODE' do |message, scan_result|
-    if scan_result.start_with? 'CODE_39,'
-      message.reply.text "User: #{message[:FromUserName]} scan barcode, result is #{scan_result.split(',')[1]}"
-    end
-  end
-
-  # 当用户点击菜单时
-  on :click, with: 'BOOK_LUNCH' do |request, key|
-    request.reply.text "User: #{request[:FromUserName]} click #{key}"
-  end
-
-  # 当用户点击菜单时
-  on :view, with: 'http://wechat.somewhere.com/view_url' do |request, view|
-    request.reply.text "#{request[:FromUserName]} view #{view}"
-  end
 
   # 处理图片信息
   # 直接将图片返回给用户
@@ -109,36 +131,37 @@ class WechatsController < ApplicationController
     request.reply.success # user can not receive this message
   end
 
+
   # 成员进入应用的事件推送
-  on :event, with: 'enter_agent' do |request|
-    request.reply.text "#{request[:FromUserName]} enter agent app now"
-  end
-
-  # 当异步任务增量更新成员完成时推送
-  on :batch_job, with: 'sync_user' do |request, batch_job|
-    request.reply.text "job #{batch_job[:JobId]} finished, return code #{batch_job[:ErrCode]}, return message #{batch_job[:ErrMsg]}"
-  end
-
-  # 当异步任务全量覆盖成员完成时推送
-  on :batch_job, with: 'replace_user' do |request, batch_job|
-    request.reply.text "job #{batch_job[:JobId]} finished, return code #{batch_job[:ErrCode]}, return message #{batch_job[:ErrMsg]}"
-  end
-
-  # 当异步任务邀请成员关注完成时推送
-  on :batch_job, with: 'invite_user' do |request, batch_job|
-    request.reply.text "job #{batch_job[:JobId]} finished, return code #{batch_job[:ErrCode]}, return message #{batch_job[:ErrMsg]}"
-  end
+  # on :event, with: 'enter_agent' do |request|
+  #   request.reply.text "#{request[:FromUserName]} enter agent app now"
+  # end
+  #
+  # # 当异步任务增量更新成员完成时推送
+  # on :batch_job, with: 'sync_user' do |request, batch_job|
+  #   request.reply.text "job #{batch_job[:JobId]} finished, return code #{batch_job[:ErrCode]}, return message #{batch_job[:ErrMsg]}"
+  # end
+  #
+  # # 当异步任务全量覆盖成员完成时推送
+  # on :batch_job, with: 'replace_user' do |request, batch_job|
+  #   request.reply.text "job #{batch_job[:JobId]} finished, return code #{batch_job[:ErrCode]}, return message #{batch_job[:ErrMsg]}"
+  # end
+  #
+  # # 当异步任务邀请成员关注完成时推送
+  # on :batch_job, with: 'invite_user' do |request, batch_job|
+  #   request.reply.text "job #{batch_job[:JobId]} finished, return code #{batch_job[:ErrCode]}, return message #{batch_job[:ErrMsg]}"
+  # end
 
   # 当异步任务全量覆盖部门完成时推送
-  on :batch_job, with: 'replace_party' do |request, batch_job|
-    request.reply.text "job #{batch_job[:JobId]} finished, return code #{batch_job[:ErrCode]}, return message #{batch_job[:ErrMsg]}"
-  end
+  # on :batch_job, with: 'replace_party' do |request, batch_job|
+  #   request.reply.text "job #{batch_job[:JobId]} finished, return code #{batch_job[:ErrCode]}, return message #{batch_job[:ErrMsg]}"
+  # end
 
   # 事件推送群发结果
-  on :event, with: 'masssendjobfinish' do |request|
-    # https://mp.weixin.qq.com/wiki?action=doc&id=mp1481187827_i0l21&t=0.03571905015619936#8
-    request.reply.success # request is XML result hash.
-  end
+  # on :event, with: 'masssendjobfinish' do |request|
+  #   # https://mp.weixin.qq.com/wiki?action=doc&id=mp1481187827_i0l21&t=0.03571905015619936#8
+  #   request.reply.success # request is XML result hash.
+  # end
 
   # 当无任何responder处理用户信息时,使用这个responder处理
   on :fallback, respond: '欢迎你'
@@ -150,14 +173,14 @@ class WechatsController < ApplicationController
   # end
 
   # 获取用户的nickname,headimageurl
-  def fetch_user(openid)
-    _hash = wechat.user(openid)
-    user = User.find_or_initilize_via_wechat(openid)
-    user.attribute = {
-        nickname: _hash['nickename'].presence || user.nickname,
-        headimageurl: _hash['headimageurl'].presence || user.headimageurl
-    }
-    user.save!
-    return user
-  end
+  # def fetch_user(openid)
+  #   _hash = wechat.user(openid)
+  #   user = User.find_or_initilize_via_wechat(openid)
+  #   user.attribute = {
+  #       nickname: _hash['nickename'].presence || user.nickname,
+  #       headimageurl: _hash['headimgurl'].presence || user.headimageurl
+  #   }
+  #   user.save!
+  #   return user
+  # end
 end

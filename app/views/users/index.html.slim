@@ -1,2 +1,21 @@
-- @user.each do |user|
-= render @users
+h1.row.col-md-4.col-md-offset-6  Users
+=render 'common/header'
+small= "Total: #{User.count}"
+table.table.table-striped
+  tr
+    th Id
+    th nickname
+    th openid
+    th headimageurl
+    th wechat_tag
+    th colspan='2'handle
+  /th
+  - @users.each do |user|
+    tr
+      td= user.id
+      td= user.nickname
+      td= user.openid
+      td= image_tag user.headimageurl, size: '50x50'
+      td= user.wechat_tag
+      td= link_to 'edit', edit_user_path(user)
+      td= link_to 'delete', user, method: :delete, data: {confirm: 'are you sure?'}

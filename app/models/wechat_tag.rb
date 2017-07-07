@@ -3,7 +3,7 @@ class WechatTag < ApplicationRecord
   enum tag_types: [:as_normal, :as_role, :as_group]
   validates :name, presence:true, uniqueness:true
 
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, through: :user_wechat_tag
 
   before_create :add_to_wechat
   after_create  :update_to_wechat

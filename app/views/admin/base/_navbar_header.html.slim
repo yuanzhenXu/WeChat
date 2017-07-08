@@ -6,6 +6,13 @@
     ul.nav.navbar-top-links.navbar-right
       li
         span.m-r-sm.text-muted.welcome-message= "微信测试号后台"
+
       li
-        = link_to logout_path do
+        = link_to logout_path, method: "delete" do
           i.fa.fa-sign-out= "登出"
+      li
+        = link_to signup_path do
+          i.fa.fa-sign-in=  "注册"
+      li
+        /= link_to "Log out", logout_path, method: "delete"
+        = link_to "Log in" , login_path

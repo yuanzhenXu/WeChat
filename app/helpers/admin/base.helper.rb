@@ -59,7 +59,7 @@ module Admin::BaseHelper
   end
 
   def have_new_btn?
-    return false if %w(orders shipping_categories tixians settings).include?(controller_name)
+    return false if %w(users wechat_tags).include?(controller_name)
     return true
   end
 

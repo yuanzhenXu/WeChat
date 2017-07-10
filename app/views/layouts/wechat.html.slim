@@ -16,6 +16,7 @@ html lang="zh-CN"
     = stylesheet_link_tag 'wechat'
     = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
     = javascript_include_tag 'wechat'
+    = wechat_config_js debug: false, api: %w(onMenuShareTimeline onMenuShareAppMessage chooseImage previewImage uploadImage downloadImage hideMenuItems closeWindow scanQRCode)
 
     = csrf_meta_tags
     -#= render 'layouts/baidu_tongji'

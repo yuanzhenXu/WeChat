@@ -6,7 +6,7 @@ module Wechat::BaseHelper
 
   def use_default_share_uri?
     case controller_name
-      when 'wechat_tag', 'welcome', 'users', 'wechat_users'
+      when 'wechat_tags', 'welcome', 'users', 'wechat_users'
         return true
     end
 

@@ -1,13 +1,15 @@
-h1.row.col-md-4.col-md-offset-6  Users
+h1.row.col-md-4.col-md-offset-6  用户管理
 =render 'common/header'
+wrapper.wrapper-content.animated.fadeInRight
+  = render 'filters'
 small= "Total: #{User.count}"
 table.table.table-striped
   tr
     th Id
-    th nickname
+    th 昵称
     th openid
-    th headimageurl
-    th wechat_tag
+    th 头像
+    th 微信标签
     th colspan='2'handle
   /th
   - @users.each do |user|

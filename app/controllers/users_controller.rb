@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     # @user = @current_user
-    # @wechat_tag = @user.wechat_tag.find_by(params[:id])
+    # @wechat_tags = @user.wechat_tags.find_by(params[:id])
   end
 
   def create
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   # 给用户添加标签
   def edit
     @user = User.find(params[:id])
-    # @user.wechat_tag = wechat_tag
+    # @user.wechat_tags = wechat_tags
   end
 
   def update
@@ -54,6 +54,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:nickname, :password_digest, :email, :wechat_tag)
+    params.require(:user).permit(:nickname, :password_digest, :email, :wechat_tags)
   end
 end

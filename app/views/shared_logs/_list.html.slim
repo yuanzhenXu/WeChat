@@ -19,5 +19,5 @@ table.table.table-striped
         td= shared_log.query
         td= shared_log.created_at.localtime.strftime("%Y年%m月%d日 %H:%M")
 
-/.pageList.text-center
-/  = paginate @share_logs, size: 20
+.pageList.text-center
+  = paginate @shared_logs

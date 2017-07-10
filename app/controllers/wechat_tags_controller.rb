@@ -1,13 +1,14 @@
-class WechatTagController < ApplicationController
+class WechatTagsController < ApplicationController
 
+  wechat_api
   before_action :fetch_tag, only: [:show, :edit, :update, :destroy, :users]
 
   def index
-    @wechat_tags = WechatTag.all
+    @wechat_tags = WechatTag.all.includes(:users).page(params[:page]||1).per(20)
   end
 
   def show
-
+    @wechat_tag = WechatTag.find(params[:id])
   end
 
   def edit
@@ -19,10 +20,10 @@ class WechatTagController < ApplicationController
   end
 
   def create
-    @wechat_tag = WechatTag.create(wechat_tag_params)
+    @wechat_tag = WechatTag.new(wechat_tag_params)
     if @wechat_tag.save
       flash[:notice] = "保存成功"
-      redirect_to wechat_tag_path
+      redirect_to wechat_tags_path
     else
       render action: 'new'
     end
@@ -42,7 +43,7 @@ class WechatTagController < ApplicationController
     @wechat_tag = WechatTag.find(params[:id])
     @wechat_tag.destroy
     flash[:notice] = "删除成功"
-    redirect_to wechat_tag_path
+    redirect_to wechat_tags_path
   end
 
   def users

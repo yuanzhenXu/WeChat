@@ -1,0 +1,42 @@
+= render 'admin/base/subnav'
+col-lg-4
+  .title-action
+    /- if action_name == 'index'
+    /  - if have_new_btn?
+    = link_to '添加', {controller: controller_name, action: :new}, class: 'btn btn-sm btn-primary'
+    /- else
+    /= link_to '返回', {controller: controller_name, action: :index}, class: 'btn btn-sm btn-primary'
+.wrapper.wrapper-content.animated.fadeInRight
+  .ibox.float-e-margins
+    .ibox-content
+      small="Total: #{WechatTag.count}"
+
+      table.table.table-striped
+        tr
+          th ID
+          th= WechatTag.human_attribute_name(:name)
+          /th= WechatTag.human_attribute_name(:tag_type)
+          th= WechatTag.human_attribute_name(:tagid)
+          th= WechatTag.human_attribute_name(:tag_type)
+          th 用户数
+          th
+
+        - @wechat_tags.each do |resource|
+          tr
+            td= resource.id
+            td= resource.name
+            td
+              /.label class="label-#{enum_color(WechatTag.tag_types.fetch(resource.tag_type))}"
+              = WechatTag.human_attribute_name("tag_type.#{resource.tag_type}")
+            td= resource.tagid
+            /td= resource.tag_type
+            td
+              = link_to resource.users.size, users_wechat_tag_path(resource)
+            td
+              .btn-group
+                = link_to '编辑', edit_wechat_tag_path(resource), class: 'btn btn-white btn-sm'
+                = link_to '删除', resource, :method => :delete, :data => { :confirm => 'are you sure?' },
+                        class: 'btn btn-white btn-sm'
+
+      .pageList.text-center
+        = paginate @wechat_tags

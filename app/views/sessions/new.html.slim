@@ -1,4 +1,4 @@
-h1.row.col-md-8.col-md-offset-5 log in
+/h1.row.col-md-8.col-md-offset-5 log in
 /.row
 /  .col-md-6.col-md-offset-3
 /    = form_for(:session, url: login_path) do |f|
@@ -11,14 +11,13 @@ h1.row.col-md-8.col-md-offset-5 log in
 /    p
 /      | new user ? #{link_to "sign up now", new_user_path}
 
-
 .middle-box.text-center.loginscreen.animated.fadeInDown
   div
-    /h2= t('site_name')
+    h2= "Login"
     = form_for :session, url: login_path, class: 'm-t', role: 'form' do |f|
       .form-group
         = f.phone_field :mobile, class: 'form-control', placeholder: User.human_attribute_name(:mobile), required: true
       .form-group
-        = f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name(:password), required: true
+        = f.password_field :password_digest, class: 'form-control', placeholder: User.human_attribute_name(:password), required: true
       = f.submit "login", class: 'btn btn-primary block full-width m-b'
       / = link_to t('wechat_login'), @wechat_login_url, class: 'btn btn-warning block full-width m-b'

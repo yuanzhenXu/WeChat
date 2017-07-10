@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  # skip_before_action :require_admin
 
   wechat_api
   def new
@@ -13,7 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
+    user = User.find_by(mobile: params[:session][:mobile])
     if user
       log_in user
       login_in_as_admin user
@@ -35,7 +36,8 @@ class SessionsController < ApplicationController
   def destroy
     log_out_admin
     log_out
-    redirect_to root_url
+    flash[:success] = '成功退出'
+    redirect_to login_path
   end
 
   # def auth_callback

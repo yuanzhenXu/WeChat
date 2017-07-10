@@ -1,4 +1,5 @@
 module SessionsHelper
+
   #登入指定的用户
   def log_in(user)
     session[:user_id] = user.id
@@ -90,5 +91,6 @@ module SessionsHelper
     redirect_to(session["return_to"] || request.env["HTTP_REFERER"] || default)
     session["return_to"] = nil
   end
+
 
 end

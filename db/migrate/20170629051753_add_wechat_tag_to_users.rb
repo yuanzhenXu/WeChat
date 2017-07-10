@@ -1,5 +1,5 @@
 class AddWechatTagToUsers < ActiveRecord::Migration[5.1]
   def change
-    add_column  :users, :wechat_tag, :string
+    add_column :users, :wechat_tags, :string
   end
 end

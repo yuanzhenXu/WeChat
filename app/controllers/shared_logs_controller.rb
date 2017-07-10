@@ -18,6 +18,6 @@ class SharedLogsController < ApplicationController
       # end
 
     end
-    # @shared_logs = @shared_logs.order('created_at desc').page(params[:page]).per(20)
+    @shared_logs = @shared_logs.order('created_at desc').page(params[:page]).per(20)
   end
 end

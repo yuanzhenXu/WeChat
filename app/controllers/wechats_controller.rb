@@ -173,14 +173,14 @@ class WechatsController < ApplicationController
   # end
 
   # 获取用户的nickname,headimageurl
-  # def fetch_user(openid)
-  #   _hash = wechat.user(openid)
-  #   user = User.find_or_initilize_via_wechat(openid)
-  #   user.attribute = {
-  #       nickname: _hash['nickename'].presence || user.nickname,
-  #       headimageurl: _hash['headimgurl'].presence || user.headimageurl
-  #   }
-  #   user.save!
-  #   return user
-  # end
+  def fetch_user(openid)
+    _hash = wechat.user(openid)
+    user = User.find_or_initilize_via_wechat(openid)
+    user.attribute = {
+        nickname: _hash['nickename'].presence || user.nickname,
+        headimageurl: _hash['headimgurl'].presence || user.headimageurl
+    }
+    user.save!
+    return user
+  end
 end

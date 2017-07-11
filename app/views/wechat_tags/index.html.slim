@@ -1,5 +1,7 @@
 = render 'admin/base/subnav'
-col-lg-4
+
+/= current_user.inspect
+col-lg-4.white-bg
   .title-action
     /- if action_name == 'index'
     /  - if have_new_btn?
@@ -25,10 +27,10 @@ col-lg-4
           tr
             td= resource.id
             td= resource.name
+            td= resource.tagid
             td
               /.label class="label-#{enum_color(WechatTag.tag_types.fetch(resource.tag_type))}"
               = WechatTag.human_attribute_name("tag_type.#{resource.tag_type}")
-            td= resource.tagid
             /td= resource.tag_type
             td
               = link_to resource.users.size, users_wechat_tag_path(resource)

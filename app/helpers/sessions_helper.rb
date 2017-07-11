@@ -13,7 +13,7 @@ module SessionsHelper
 
   def current_user=(user)
     return nil if user.blank?
-    session[:user_id] = user.openid
+    session[:user_id] = user.id
     @current_user = user
   end
 

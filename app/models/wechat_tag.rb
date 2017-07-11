@@ -10,20 +10,20 @@ class WechatTag < ApplicationRecord
   after_destroy :delete_to_wechat
 
   def add_to_wechat
-    # begin
-    #   res = Wechat.api.tag_create(self.name)
-    #   self[:tagid] = res['tag']['id']
-    #   raise res if res['errmsg'] != 'ok'
-    # rescue => e
-    #   _tags = Wechat.api.tags['tags']
-    #   t = _tags.select{|t| t['name'] == self.name}
-    #   if t.present?
-    #     self[:tagid] = t[0]['id']
-    #   else
-    #     errors.add(:base, '不能添加微信标签')
-    #     throw(:abort)
-    #   end
-    # end
+    begin
+      res = Wechat.api.tag_create(self.name)
+      self[:tagid] = res['tag']['id']
+      raise res if res['errmsg'] != 'ok'
+    rescue => e
+      _tags = Wechat.api.tags['tags']
+      t = _tags.select{|t| t['name'] == self.name}
+      if t.present?
+        self[:tagid] = t[0]['id']
+      else
+        errors.add(:base, '不能添加微信标签')
+        throw(:abort)
+      end
+    end
   end
 
   def update_to_wechat

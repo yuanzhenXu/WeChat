@@ -1,23 +1,32 @@
-h1.row.col-md-4.col-md-offset-6  用户管理
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    h2.col-md-3.col-md-offset-7 用户管理
 =render 'common/header'
-wrapper.wrapper-content.animated.fadeInRight
+
+.white-bg.wrapper.wrapper-content.animated.fadeInRight
   = render 'filters'
-small= "Total: #{User.count}"
-table.table.table-striped
-  tr
-    th Id
-    th 昵称
-    th openid
-    th 头像
-    th 微信标签
-    th colspan='2'handle
-  /th
-  - @users.each do |user|
-    tr
-      td= user.id
-      td= user.nickname
-      td= user.openid
-      td= image_tag user.headimageurl, size: '50x50'
-      td= user.wechat_tag
-      td= link_to 'edit', edit_user_path(user)
-      td= link_to 'delete', user, method: :delete, data: {confirm: 'are you sure?'}
+  .ibox.float-e-margins
+    .ibox-content
+      small= "Total: #{User.count}"
+      table.table.table-striped
+        tr
+          th Id
+          th 昵称
+          th openid
+          th 头像
+          th 微信标签
+          /th 标签ID
+          th colspan='2'handle
+        /th
+        - @users.each do |user|
+          tr
+            td= user.id
+            td= user.nickname
+            td= user.openid
+            td= image_tag user.headimageurl, size: '50x50'
+            td= user.wechat_tag
+            /td= user.wechat_tag.id
+            td= link_to 'edit', edit_user_path(user)
+            td= link_to 'delete', user, method: :delete, data: {confirm: 'are you sure?'}
+    .pageList.text-center
+      = paginate @users

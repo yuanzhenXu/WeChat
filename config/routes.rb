@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
   delete 'delete', to: 'users#destroy'
-  # get 'current_user', to: 'users#current'
+  # get 'current_user', to: 'users#show'
   get 'auth/wechat/callback', to: 'welcome#create'
 
   root 'welcome#index'

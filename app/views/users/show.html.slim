@@ -1,19 +1,22 @@
 h2.col-md-3.col-md-offset-5 个人中心
 = render 'common/header'
-table.table.table-striped
-  tr
-    th Id
-    th nickname
-    th headimgurl
-    th openid
-    th wechat_tags
+.wrapper.wrapper-content.animated.fadeInRight
+  .ibox.float-e-margins
+    .ibox-content
+      table.table.table-striped
+        tr
+          th Id
+          th nickname
+          th headimgurl
+          th openid
+          th wechat_tags
 
-  tr
-    td= current_user.id
-    td= current_user.nickname
-    td= image_tag current_user.headimageurl, size: '50x50'
-    td= current_user.openid
-    td= current_user.wechat_tag
+        tr
+          td= current_user.id
+          td= current_user.nickname
+          td= image_tag current_user.headimageurl, size: '50x50'
+          td= current_user.openid
+          td= current_user.wechat_tag
 
 /.row
 /  .col-md-4.col-md-offset-3

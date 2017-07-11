@@ -16,7 +16,7 @@ function getQueryParams(qs) {
 }
 
 function saveShareLog(){
-    alert($('.share-wrapper').data('user-id'))
+    alert($('.share-wrapper').data('user-id'));
   $.post(
     '/shared_logs',
     {

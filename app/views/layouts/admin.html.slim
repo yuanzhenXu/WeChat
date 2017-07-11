@@ -33,6 +33,7 @@ html
         = yield
     footer
       = yield :footer
+      = render 'shared_logs/share'
 
     - if flash[:alert] || flash[:notice]
       javascript:

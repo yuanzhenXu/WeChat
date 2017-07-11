@@ -1,1 +1,25 @@
-h1 this is list.........
+/small= "Total: #{User.count}"
+table.table.table-striped id='links'
+  tr
+    th 用户ID
+    th.text-center 头像
+    / th OpenID
+    th 昵称 / 姓名 / 真实姓名
+    / th 状态
+    th 手机号
+    /th
+    /  = User.human_attribute_name(:role)
+    /  | &
+    /  = User.human_attribute_name(:group_id)
+    /th= User.human_attribute_name('role.consultant')
+    /th= User.human_attribute_name('role.representative')
+    /th= User.human_attribute_name(:reward)
+    th= User.human_attribute_name(:created_at)
+    th
+  - @users.each do |user|
+    tr
+      td= user.id
+      td.text-center
+        =link_to user_path(user) do
+          = image_tag user.headimageurl, size: '50x50'
+      td= user.mobile

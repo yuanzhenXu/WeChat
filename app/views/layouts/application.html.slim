@@ -24,6 +24,6 @@ html
 
     - if flash[:alert] || flash[:notice]
       javascript:
-          $(document).ready(function () {
-              createAlert("#{flash[:alert] || flash[:notice]}", {title: ''});
-          });
+        $(document).ready(function () {
+            createAlert("#{flash[:alert] || flash[:notice]}", {title: ''});
+        });

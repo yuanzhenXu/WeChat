@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many  :shared_logs, dependent: :destroy
   has_many  :wechat_tags, through: :user_wechat_tags
 
+  scope :admin, -> { where(is_admin: true) }
+  scope :not_admin, -> { where(is_admin: false) }
+
   # has_secure_password
 
 

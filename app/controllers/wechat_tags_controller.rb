@@ -4,6 +4,7 @@ class WechatTagsController < ApplicationController
   before_action :fetch_tag, only: [:show, :edit, :update, :destroy, :users]
 
   def index
+
     @wechat_tags = WechatTag.all.includes(:users).page(params[:page]||1).per(20)
   end
 

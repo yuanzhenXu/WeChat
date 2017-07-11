@@ -7,11 +7,21 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+
+    if @is_admin = params[:is_admin].presence
+      if
+        @is_admin == 'on'
+        @users = @users.admin
+      elsif @is_admin == 'off'
+        @users = @users.not_admin
+      end
+    end
+    @users = @users.order('created_at desc').page(params[:page]).per(20)
   end
 
   def show
-    @user = User.find(params[:id])
-    # @user = @current_user
+    # @user = User.find(params[:id])
+    @current_user = User.find_by(id: session[:user_id])
     # @wechat_tags = @user.wechat_tags.find_by(params[:id])
   end
 
@@ -35,9 +45,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if @user.update(user_params) && @user.save!
       flash[:notice] = "更新成功"
-      redirect_to  @user
+      redirect_to  users_path
     else
       render 'edit'
     end
@@ -54,6 +64,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:nickname, :password_digest, :email, :wechat_tags)
+    params.require(:user).permit(:nickname, :password_digest, :email, :wechat_tag)
   end
 end

@@ -15,7 +15,7 @@
           th openid
           th 头像
           th 微信标签
-          /th 标签ID
+          th Role
           th colspan='2'handle
         /th
         - @users.each do |user|
@@ -25,7 +25,7 @@
             td= user.openid
             td= image_tag user.headimageurl, size: '50x50'
             td= user.wechat_tag
-            /td= user.wechat_tag.id
+            td= user.role
             td= link_to 'edit', edit_user_path(user)
             td= link_to 'delete', user, method: :delete, data: {confirm: 'are you sure?'}
     .pageList.text-center

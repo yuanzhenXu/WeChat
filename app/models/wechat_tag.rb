@@ -1,9 +1,11 @@
 class WechatTag < ApplicationRecord
 
-  enum tag_types: [:as_normal, :as_role, :as_group]
-  validates :name, presence:true, uniqueness:true
+  enum tag_type: [:as_normal, :as_role, :as_group]
 
-  has_and_belongs_to_many :users
+  validates :name, presence:true, uniqueness:true
+  # has_many :users, through: :user_wechat_tags
+
+  has_and_belongs_to_many :users, through: :user_wechat_tags
 
   before_create :add_to_wechat, if: 'tagid.blank?'
   after_create  :update_to_wechat, if: 'name_changed?'
@@ -27,23 +29,23 @@ class WechatTag < ApplicationRecord
   end
 
   def update_to_wechat
-    # begin
-    #   res = Wechat.api.tag_update(self.tagid, self.name)
-    #   raise res if res['errmsg'] != 'ok'
-    # rescue
-    #   errors.add(:base, '不能更新微信标签')
-    #   throw(:abort)
-    # end
+    begin
+      res = Wechat.api.tag_update(self.tagid, self.name)
+      raise res if res['errmsg'] != 'ok'
+    rescue
+      errors.add(:base, '不能更新微信标签')
+      # throw(:abort)
+    end
   end
 
   def delete_to_wechat
-    # begin
-    #   res = Wechat.api.tag_delete(self.tagid)
-    #   raise res if res['errmsg'] != 'ok'
-    # rescue
-    #   errors.add(:base, '未能删除微信标签')
-    #   throw(:abort)
-    # end
+    begin
+      res = Wechat.api.tag_delete(self.tagid)
+      raise res if res['errmsg'] != 'ok'
+    rescue
+      errors.add(:base, '未能删除微信标签')
+      throw(:abort)
+    end
   end
 
   def self.sync_from_wechat

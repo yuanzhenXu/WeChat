@@ -1,9 +1,13 @@
 class User < ApplicationRecord
   validates :nickname, presence: true
 
+  include WechatTaggable
+
   has_many  :wechat_tags, dependent: :destroy
   has_many  :shared_logs, dependent: :destroy
   has_many  :wechat_tags, through: :user_wechat_tags
+
+  enum role: [:patient, :consultant, :representative]
 
   scope :admin, -> { where(is_admin: true) }
   scope :not_admin, -> { where(is_admin: false) }

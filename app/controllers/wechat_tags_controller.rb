@@ -48,7 +48,7 @@ class WechatTagsController < ApplicationController
   end
 
   def users
-    @users = @wechat_tag.users
+    @users = @wechat_tag.users.page(params[:page]||1).per(20)
     render :edit
   end
 

@@ -1,5 +1,6 @@
-class Admin::UsersController < ApplicationController
-    wechat_api
+class Admin::UsersController < Aamin::BaseController
+
+    # wechat_api
 
     def new
       @user = User.new
@@ -51,10 +52,12 @@ class Admin::UsersController < ApplicationController
       redirect_to users_url
     end
 
-
     private
     def user_params
       params.require(:user).permit(:nickname, :password_digest, :email, :wechat_tags)
     end
 
 end
+
+
+

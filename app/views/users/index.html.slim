@@ -24,8 +24,10 @@
             td= user.nickname
             td= user.openid
             td= image_tag user.headimageurl, size: '50x50'
-            td= user.wechat_tag
-            td= user.role
+            td= user.wechat_tag_ids
+            td
+              .label class="label-#{user_role_color(user.role)} m-r-xs"
+                = User.human_attribute_name("role.#{user.role}")
             td= link_to 'edit', edit_user_path(user)
             td= link_to 'delete', user, method: :delete, data: {confirm: 'are you sure?'}
     .pageList.text-center

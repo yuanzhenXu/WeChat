@@ -1,4 +1,5 @@
-class Admin::SessionsController < ApplicationController
+class Admin::SessionsController < Admin::BaseController
+
   skip_before_action :require_admin
 
   def new
@@ -25,5 +26,4 @@ class Admin::SessionsController < ApplicationController
       render 'new'
     end
   end
-
 end

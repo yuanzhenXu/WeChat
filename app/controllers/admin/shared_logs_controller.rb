@@ -1,5 +1,6 @@
-class Admin::SharedLogsController < ApplicationController
-  wechat_api
+class Admin::SharedLogsController < Admin::BaseController
+
+  # wechat_api
 
   def create
     @shared_log = SharedLog.create(user_id: params[:user_id], query: params[:query], uri: params[:uri])
@@ -20,5 +21,4 @@ class Admin::SharedLogsController < ApplicationController
     end
     # @shared_logs = @shared_logs.order('created_at desc').page(params[:page]).per(20)
   end
-
 end

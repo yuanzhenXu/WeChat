@@ -1,4 +1,4 @@
-class Admin::WechatTagsController < ApplicationController
+class Admin::WechatTagsController < Admin::BaseController
 
     before_action :fetch_tag, only: [:show, :edit, :update, :destroy, :users]
 
@@ -58,6 +58,5 @@ class Admin::WechatTagsController < ApplicationController
     def wechat_tag_params
       params.require(:wechat_tags).permit(:name, :tag_type)
     end
-
 
 end

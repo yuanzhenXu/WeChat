@@ -28,10 +28,10 @@ col-lg-4.white-bg
             td= resource.id
             td= resource.name
             td= resource.tagid
-            td
+            /td
               /.label class="label-#{enum_color(WechatTag.tag_types.fetch(resource.tag_type))}"
-              = WechatTag.human_attribute_name("tag_type.#{resource.tag_type}")
-            /td= resource.tag_type
+              /  = WechatTag.human_attribute_name("tag_type.#{resource.tag_type}")
+            td= resource.tag_type
             td
               = link_to resource.users.size, users_wechat_tag_path(resource)
             td

@@ -1,4 +1,4 @@
-= simple_form_for(@wechat_tag, html: {class: 'form-horizontal wechat_tag'}) do |f|
+= simple_form_for(@wechat_tag, html: {class: 'form-horizontal wechat_tag'}, wrapper: :horizontal_form) do |f|
   = f.input :name
   = f.input :tag_type, as: :select, collection: WechatTag.tag_type_options
   .form-group

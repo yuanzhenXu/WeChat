@@ -64,6 +64,14 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:nickname, :password_digest, :email, wechat_tag_ids:[] )
+    params.require(:user).permit(:nickname, :password_digest, :email, :role, wechat_tag_ids: [])
+  end
+
+  def fetch_user
+    @user = User.find_by(params[:id] || params[:user_id])
+    if @user.blank?
+      flash[:alert] = '用户不存在， 请重试'
+      redirect_to users_path and return
+    end
   end
 end

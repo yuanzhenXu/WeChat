@@ -5,7 +5,7 @@ class WechatTag < ApplicationRecord
   validates :name, presence:true, uniqueness:true
   # has_many :users, through: :user_wechat_tags
 
-  has_and_belongs_to_many :users, through: :user_wechat_tags
+  has_and_belongs_to_many :users
 
   before_create :add_to_wechat, if: 'tagid.blank?'
   after_create  :update_to_wechat, if: 'name_changed?'

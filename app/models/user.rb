@@ -3,11 +3,11 @@ class User < ApplicationRecord
 
   include WechatTaggable
 
-  has_many  :wechat_tags, dependent: :destroy
+  # has_many  :wechat_tags, dependent: :destroy
   has_many  :shared_logs, dependent: :destroy
-  has_many  :wechat_tags, through: :user_wechat_tags
+  # has_many  :wechat_tags, through: :user_wechat_tags, dependent: :destroy
 
-  enum role: [:patient, :consultant, :representative]
+  enum role: [:'土豆', '香蕉', '小黄人']
 
   scope :admin, -> { where(is_admin: true) }
   scope :not_admin, -> { where(is_admin: false) }

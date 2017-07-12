@@ -5,9 +5,9 @@ module UsersHelper
       role = User.roles.key(role)
     end
 
-    case role.to_sym
+    case role.to_s
       when '土豆'
-        'plain'
+        'info'
       when '香蕉'
         'success'
       when '小黄人'

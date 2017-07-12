@@ -15,6 +15,26 @@
                 - if @user.admin?
                   .label.label-primary.m-t.m-l
                     = User.human_attribute_name("is_admin")
+              ul.unstyled.no-padding
+                /li
+                /  strong= WechatAccount.human_attribute_name(:sex)
+                /  | ：
+                /  - unless @wechat_account.sex.nil?
+                /    = WechatAccount.human_attribute_name("sex.#{@wechat_account.sex}")
+                li
+                  strong= User.human_attribute_name(:openid)
+                  | ：
+                  = @user.openid
+                li
+                  strong= User.human_attribute_name(:created_at)
+                  | ：
+                  = @user.created_at.strftime('%Y/%m/%d %H:%M')
+                li
+                  strong= WechatAccount.human_attribute_name(:tagid_list)
+                  | ：
+                  - tags = WechatTag.where(tagid: @wechat_account.tagid_list)
+                  - if tags.present?
+                    = tags.pluck(:name).join(',')
 
 
 

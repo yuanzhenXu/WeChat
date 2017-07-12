@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(mobile: params[:session][:mobile])
-    if user
+    if user && user.authenticate(params[:session][:password])
       log_in user
       login_in_as_admin user
       flash[:success] = '登录成功'

@@ -15,6 +15,10 @@ class WechatUsersController < ApplicationController
 
   end
 
+  def update
+
+  end
+
   def destroy
     @wechat_user = WechatUser.find(params[:id])
     @wechat_user.destroy

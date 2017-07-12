@@ -2,6 +2,7 @@ class User < ApplicationRecord
   validates :nickname, presence: true
 
   include WechatTaggable
+  has_secure_password
 
   # has_many  :wechat_tags, dependent: :destroy
   has_many  :shared_logs, dependent: :destroy
@@ -9,10 +10,22 @@ class User < ApplicationRecord
 
   enum role: [:'土豆', '香蕉', '小黄人']
 
+  before_validation :generate_passowrd, if: 'password_digest.blank?'
+
   scope :admin, -> { where(is_admin: true) }
   scope :not_admin, -> { where(is_admin: false) }
 
-  # has_secure_password
+  def generate_passowrd
+    password= random_code_with_string(8)
+    self.password = password
+    return true
+  end
+
+  def random_code_with_string(number)
+    charset = Array('0'..'9') + Array('a'..'z') + Array('0'..'9')
+    Array.new(number) { charset.sample }.join
+  end
+
 
 
   # before_action :logged_in_user, only:[:edit, :update]

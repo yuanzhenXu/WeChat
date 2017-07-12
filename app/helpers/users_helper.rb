@@ -11,7 +11,7 @@ module UsersHelper
       when '香蕉'
         'success'
       when '小黄人'
-        'primary'
+        'danger'
     end
   end
 

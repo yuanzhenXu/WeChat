@@ -14,7 +14,7 @@
           th Id
           th 昵称
           th openid
-          th 头像
+          /th 头像
           th 微信标签
           th Role
           th colspan='2'
@@ -24,7 +24,7 @@
             td= user.id
             td= user.nickname
             td= user.openid
-            td= image_tag user.headimageurl, size: '50x50'
+            /td= image_tag user.headimageurl, size: '50x50'
             td= user.wechat_tag_ids
 
             td

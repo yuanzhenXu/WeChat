@@ -5,12 +5,12 @@ nav.navbar-default.navbar-static-side role='navigation'
         .dropdown.profile-element
           - if logged_in?
             .span
-              = image_tag current_admin.headimageurl, class: 'img-circle', size: '50x50'
+              /= image_tag current_admin.headimageurl, class: 'img-circle', size: '50x50'
             = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
               span.clear
                 span.block.m-t-xs
-                  strong.font-bold= link_to current_user.nickname, current_user
-                    / span.text-muted.text-xs.block 管理员
+                  /strong.font-bold= link_to current_user.nickname, current_user
+                  span.text-muted.text-xs.block 管理员
                 .logo-element= "wechat"
               li
                 = link_to '#' do

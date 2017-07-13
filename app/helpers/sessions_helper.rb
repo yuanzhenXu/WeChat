@@ -92,5 +92,4 @@ module SessionsHelper
     session["return_to"] = nil
   end
 
-
 end

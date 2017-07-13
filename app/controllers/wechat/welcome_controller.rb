@@ -16,7 +16,7 @@ class Wechat::WelcomeController < Wechat::BaseController
       @user = User.find_by(openid: [auth_hash.fetch('extra').fetch('raw_info').fetch('openid')])
       session[:user_id] = @user.id
       # @user = User.find_by(openid: session[:user_id])
-      # @user = current_user
+      @user = current_user
       p "******#{@info}"
       p "XXXXXXXXX"
       p @user
@@ -26,6 +26,7 @@ class Wechat::WelcomeController < Wechat::BaseController
       @user.nickname = auth_hash.fetch('info').fetch('nickname')
       @user.headimageurl = auth_hash.fetch('extra').fetch('raw_info').fetch('headimgurl')
       session[:user_id] = @user.id
+      p '#################!!!!!!!!!!!'
       @user.save!
       # @user = current_user
       # p "pPpppppppppppp"

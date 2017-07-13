@@ -9,6 +9,7 @@ module WechatTaggable
   end
 
   def add_to_wechat(wechat_tag)
+    debugger
     p ' **' * 20
     p 'add_to_wechat'
     res = Wechat.api.tag_add_user(wechat_tag.tagid, Array(self.openid))

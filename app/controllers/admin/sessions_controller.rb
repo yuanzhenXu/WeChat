@@ -26,4 +26,10 @@ class Admin::SessionsController < Admin::BaseController
       render 'new'
     end
   end
+
+  def destroy
+    log_out_admin
+    log_out
+    redirect_to admin_login_path
+  end
 end

@@ -1,4 +1,4 @@
-class Admin::UsersController < Aamin::BaseController
+class Admin::UsersController < Admin::BaseController
 
     # wechat_api
 
@@ -8,6 +8,16 @@ class Admin::UsersController < Aamin::BaseController
 
     def index
       @users = User.all
+
+      if @is_admin = params[:is_admin].presence
+        if
+        @is_admin == 'on'
+          @users = @users.admin
+        elsif @is_admin == 'off'
+          @users = @users.not_admin
+        end
+      end
+      @users = @users.order('created_at desc').page(params[:page]).per(20)
     end
 
     def show

@@ -2,7 +2,7 @@
   .col-lg-8
     /h2= t("admin.#{controller_name}")
     ol.breadcrumb
-      li= link_to '首页', root_path
+      li= link_to '首页', admin_users_path
       - if action_name == 'index'
         li.active= "列表"
       - else

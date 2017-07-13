@@ -1,0 +1,15 @@
+.ibox.float-e-margins
+  .ibox-content
+    = form_tag users_path, method: :get, class: 'form-horizonal' do
+      .row
+        .col-sm-3
+          .form-group
+            = label_tag :is_admin, User.human_attribute_name(:is_admin), class: 'control-label'
+            |：
+            = select_tag :is_admin, options_for_select([['是', 'on'], ['否', 'off']], @is_admin), include_blank: '全部', class: 'form-control', onchange: 'this.form.submit();'
+        .col-sm-3
+          .form-group
+            br
+            = submit_tag '搜索', class: 'btn btn-primary btn-sm'
+            | &nbsp;&nbsp;&nbsp;&nbsp;
+            = button_tag '清除', class: 'btn btn-warning btn-sm clear-btn'

@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   post 'signup', to: 'users#create'
   delete 'delete', to: 'users#destroy'
   # get 'current_user', to: 'users#show'
-  get 'auth/wechat/callback', to: 'welcome#create'
+  get 'auth/wechat/callback', to: 'wechat/welcome#create'
 
-  root 'welcome#index'
+  # root 'welcome#index'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
@@ -22,6 +22,10 @@ Rails.application.routes.draw do
     resources :wechat_tags
 
     root 'sessions#new'
+  end
+
+  namespace :wechat do
+    get 'home', to: 'home#index'
   end
   # resource :wechat_user
   resources :wechat_tags do

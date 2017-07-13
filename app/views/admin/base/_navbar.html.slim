@@ -5,49 +5,49 @@ nav.navbar-default.navbar-static-side role='navigation'
         .dropdown.profile-element
           - if logged_in?
             .span
-              = image_tag current_user.headimageurl, class: 'img-circle', size: '50x50'
+              = image_tag current_admin.headimageurl, class: 'img-circle', size: '50x50'
             = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
               span.clear
                 span.block.m-t-xs
                   strong.font-bold= link_to current_user.nickname, current_user
                     / span.text-muted.text-xs.block 管理员
-        .logo-element= "wechat"
-      li
-        = link_to '#' do
-          i.fa.fa-users
-          span.nav-label= "用户"
-          span.fa.arrow
-        ul.nav.nav-second-level.collapse
-          li
-            = link_to "用户", users_path
-      li
-        = link_to '#' do
-          i.fa.fa-th-large
-          span.nav-label 关注用户
-          span.fa.arrow
-        ul.nav.nav-second-level.collapse
-          li
-            = link_to '关注用户', wechat_users_path
-      li
-        = link_to '#' do
-          i.fa.fa-wechat
-          span.nav-label 微信
-          span.fa.arrow
-        ul.nav.nav-second-level.collapse
-          li
-            = link_to '标签', wechat_tags_path
-      li
-        = link_to '#' do
-          i.fa.fa-wrench
-          span.nav-label 设置
-          span.fa.arrow
+                .logo-element= "wechat"
+              li
+                = link_to '#' do
+                  i.fa.fa-users
+                  span.nav-label= "用户"
+                  span.fa.arrow
+                ul.nav.nav-second-level.collapse
+                  li
+                    = link_to "用户", users_path
+              li
+                = link_to '#' do
+                  i.fa.fa-th-large
+                  span.nav-label 关注用户
+                  span.fa.arrow
+                ul.nav.nav-second-level.collapse
+                  li
+                    = link_to '关注用户', wechat_users_path
+              li
+                = link_to '#' do
+                  i.fa.fa-wechat
+                  span.nav-label 微信
+                  span.fa.arrow
+                ul.nav.nav-second-level.collapse
+                  li
+                    = link_to '标签', wechat_tags_path
+              li
+                = link_to '#' do
+                  i.fa.fa-wrench
+                  span.nav-label 设置
+                  span.fa.arrow
 
-      li
-        = link_to '#' do
-          i.fa.fa-database
-          span.nav-label 日志
-          span.fa.arrow
-        ul.nav.nav-second-level.collapse
-          li
-            = link_to '分享', shared_logs_path
+              li
+                = link_to '#' do
+                  i.fa.fa-database
+                  span.nav-label 日志
+                  span.fa.arrow
+                ul.nav.nav-second-level.collapse
+                  li
+                    = link_to '分享', shared_logs_path
 

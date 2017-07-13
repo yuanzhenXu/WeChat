@@ -5,13 +5,12 @@ col-lg-4.white-bg
   .title-action
     /- if action_name == 'index'
     /  - if have_new_btn?
-    = link_to '添加', {controller: controller_name, action: :new}, class: 'btn btn-sm btn-primary'
     /- else
-    /= link_to '返回', {controller: controller_name, action: :index}, class: 'btn btn-sm btn-primary'
 .wrapper.wrapper-content.animated.fadeInRight
   .ibox.float-e-margins
     .ibox-content
-      small="Total: #{WechatTag.count}"
+      /small="Total: #{WechatTag.count}"
+      small="Total: #{@wechat_tags.total_count}"
 
       table.table.table-striped
         tr
@@ -21,7 +20,7 @@ col-lg-4.white-bg
           th= WechatTag.human_attribute_name(:tagid)
           th= WechatTag.human_attribute_name(:tag_type)
           th 用户数
-          th
+          th= link_to '添加', {controller: controller_name, action: :new}, class: 'btn btn-sm btn-primary'
 
         - @wechat_tags.each do |resource|
           tr

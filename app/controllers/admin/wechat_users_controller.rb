@@ -1,5 +1,6 @@
-class Admin::WechatUsersController < ApplicationController
-    wechat_api
+class Admin::WechatUsersController < Admin::BaseController
+
+    # wechat_api
     def index
       @wechat_users = WechatUser.all
 

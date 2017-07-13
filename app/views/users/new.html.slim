@@ -1,16 +1,17 @@
-.row
-  .col-md-6.col-md-offset-3
-    h1.col-md-8.col-md-offset-5 Sign up
-    = form_for(:user) do |f|
-      = f.label :nickname
-      = f.text_field :nickname, class: 'form-control'
-      = f.label :wechat_tag
-      = f.text_field :wechat_tag, class: 'form-control'
-      = f.label :email
-      = f.email_field :email, class: 'form-control'
-      = f.label :password_digest
-      = f.password_field :password_digest, class: 'form-control'
-      = f.label :password_confirmation, "Conformation"
-      = f.password_field :password_confirmation, class: 'form-control'
-      br
-      = f.submit "sign up", class: "btn btn-primary col-md-12 col-md-ofset-0"
+.white-bg
+  .row
+    .col-md-6.col-md-offset-3
+      h1.col-md-8.col-md-offset-5 Sign up
+      = form_for(:user) do |f|
+        = f.label :nickname
+        = f.text_field :nickname, class: 'form-control'
+        = f.label :wechat_tag
+        = f.text_field :wechat_tag, class: 'form-control'
+        = f.label :email
+        = f.email_field :email, class: 'form-control'
+        = f.label :password_digest
+        = f.password_field :password_digest, class: 'form-control'
+        = f.label :password_confirmation, "Conformation"
+        = f.password_field :password_confirmation, class: 'form-control'
+        br
+        = f.submit "sign up", class: "btn btn-primary col-md-12 col-md-ofset-0"

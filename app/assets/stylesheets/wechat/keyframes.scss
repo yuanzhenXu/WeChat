@@ -1,0 +1,67 @@
+/*ball clip rotate keyframes*/
+@-webkit-keyframes ball-clip-rotate {
+  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  50% { -webkit-transform: rotate(180deg); transform: rotate(180deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-moz-keyframes ball-clip-rotate {
+  0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
+  50% { -moz-transform: rotate(180deg); transform: rotate(180deg); }
+  100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes ball-clip-rotate {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// twinkling
+@-webkit-keyframes twinkling {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@-moz-keyframes twinkling {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes twinkling {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/*fade down keyframes*/
+@-webkit-keyframes fade-down {
+  0% { -webkit-transform: translateY(0px) translateX(-50%); }
+  50% { -webkit-transform: translateY(10px) translateX(-50%); }
+  100% { -webkit-transform: translateY(20px) translateX(-50%); }
+}
+@-moz-keyframes fade-down {
+  0% { -moz-transform: translateY(0px) translateX(-50%); }
+  50% { -moz-transform: translateY(10px) translateX(-50%); }
+  100% { -moz-transform: translateY(20px) translateX(-50%); }
+}
+@keyframes fade-down {
+  0% { transform: translateY(0px) translateX(-50%); }
+  50% { transform: translateY(10px) translateX(-50%); }
+  100% { transform: translateY(20px) translateX(-50%); }
+}
+
+/*up fadeout keyframes*/
+@-webkit-keyframes up-fadeout {
+  0% { -webkit-transform: translate(-50%, 0); opacity: 0; }
+  50% { -webkit-transform: translate(-50%, -60px); opacity: 1; }
+  100% { -webkit-transform: translate(-50%, -120px); opacity: 0; }
+}
+@-moz-keyframes up-fadeout {
+  0% { -moz-transform: translate(-50%, 0); opacity: 0; }
+  50% { -moz-transform: translate(-50%, -60px); opacity: 1; }
+  100% { -moz-transform: translate(-50%, -120px); opacity: 0; }
+}
+@keyframes up-fadeout {
+  0% { transform: translate(-50%, 0); opacity: 0; }
+  50% { transform: translate(-50%, -60px); opacity: 1; }
+  100% { transform: translate(-50%, -120px); opacity: 0; }
+}

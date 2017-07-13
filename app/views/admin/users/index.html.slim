@@ -8,7 +8,7 @@
   .ibox.float-e-margins
     .ibox-content
       /= render'users/detail'
-      small= "Total: #{@users.total_count}"
+      small= "Total: #{User.count}"
       table.table.table-striped
         tr
           th Id

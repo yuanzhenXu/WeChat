@@ -29,7 +29,7 @@ production:
 
 development:
   <<: *default
-  trusted_domain_fullname: "http://2m4nh9.natappfree.cc"
+  trusted_domain_fullname: "http://ag4uqr.natappfree.cc"
 
 test:
   <<: *default

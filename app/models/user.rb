@@ -1,7 +1,8 @@
 class User < ApplicationRecord
+  include WechatTaggable
+
   validates :nickname, presence: true
 
-  include WechatTaggable
   has_secure_password
 
   # has_many  :wechat_tags, dependent: :destroy
@@ -16,7 +17,7 @@ class User < ApplicationRecord
   scope :not_admin, -> { where(is_admin: false) }
 
   def generate_passowrd
-    password= random_code_with_string(8)
+    password = random_code_with_string(8)
     self.password = password
     return true
   end

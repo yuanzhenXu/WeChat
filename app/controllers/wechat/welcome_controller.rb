@@ -35,7 +35,7 @@ class Wechat::WelcomeController < Wechat::BaseController
       # p current_user
     end
     # render json: @user
-    redirect_to wechat_home_path
+    redirect_to wechat_home_path || session[:return_to]
   end
 
 end

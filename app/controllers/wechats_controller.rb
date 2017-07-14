@@ -46,8 +46,12 @@ class WechatsController < ApplicationController
 
   # 当用户加关注
   on :event, with: 'subscribe' do |request|
+    request.reply.news([welcome_message]) do |article, n|
+      article.item title: n[:title], description: nil, pic_url: n[:pic_url], url: n[:url]
+    end
+    p 'hello world*********'
     # request.reply.text "User #{request[:FromUserName]} subscribe now"
-    if WechatUser.exist?(openid:request[:FromUserName])
+    if WechatUser.exists?(openid:request[:FromUserName])
       @wechat_user.openid = request[:FromUserName]
       @wechat_user.event = 'subscribe'
       @wechat_user.subscribe_at = Time.now
@@ -59,9 +63,7 @@ class WechatsController < ApplicationController
       @wechat_user.subscribe_at = Time.now
       @wechat_user.save!
     end
-    request.reply.news([welcome_message]) do |article, n, index|
-      article.item title: n[:title], description: nil, pic_url: n[:pic_url], url: n[:url]
-    end
+
 
     p '#######'
     p request
@@ -74,7 +76,7 @@ class WechatsController < ApplicationController
      :title => "欢迎你",
      :content => "未完待续..........",
      :pic_url => "",
-     :url => root_url
+     :url => wechat_url
 
     }
   end
@@ -128,6 +130,7 @@ class WechatsController < ApplicationController
 
   # 当用户取消关注订阅
   on :event, with: 'unsubscribe' do |request|
+    p '0000KKKKKKK'
     request.reply.success # user can not receive this message
   end
 

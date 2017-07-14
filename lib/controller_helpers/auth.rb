@@ -60,7 +60,7 @@ module ControllerHelpers
         if wechat_agent?
           redirect_to '/auth/wechat'
         else
-          flash[:alert] = t('login_notice')
+          flash[:alert] = '请先登录'
           redirect_to root_path
         end
       end

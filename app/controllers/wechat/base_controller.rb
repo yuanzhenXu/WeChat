@@ -15,4 +15,5 @@ class Wechat::BaseController < ApplicationController
     #     uri: uri
     # )
   end
+
 end

@@ -37,7 +37,7 @@ function saveShareLog(){
 
 $(document).ready(function(){
   wx.ready(function() {
-    console.log('ready')
+    console.log('ready');
     // wx.hideOptionMenu();
 
     // var title = "标题" ;

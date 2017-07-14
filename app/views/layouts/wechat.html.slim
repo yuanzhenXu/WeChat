@@ -16,15 +16,15 @@ html lang="zh-CN"
     = stylesheet_link_tag 'wechat'
     = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
     = javascript_include_tag 'wechat'
-    = wechat_config_js debug: false, api: %w(onMenuShareTimeline onMenuShareAppMessage chooseImage previewImage uploadImage downloadImage hideMenuItems closeWindow scanQRCode)
+    = wechat_config_js debug: true, api: %w(onMenuShareTimeline onMenuShareAppMessage chooseImage previewImage uploadImage downloadImage hideMenuItems closeWindow scanQRCode)
 
     = csrf_meta_tags
     -#= render 'layouts/baidu_tongji'
 
   body class=controller_name id="#{controller_name}_#{action_name}"
     = yield
-    = hidden_field_tag :current_signature, current_signature
-
+    /= hidden_field_tag :current_signature, current_signature
+    /= share_uri
     footer
       = render 'wechat/partials/share'
       /- if current_user.points.registered.blank?

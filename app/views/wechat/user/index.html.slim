@@ -1,0 +1,11 @@
+/h2.col-md-3.col-md-offset-5 你好啊
+.user-column
+  .user-column-info
+    .user-column-avatar
+      .photo = image_tag current_user.headimageurl, size:'50x50',alt: current_user.nickname, class: 'img-circle'
+    .user-column-name
+      .name= current_user.nickname
+      .desc
+        p
+          | 角色:
+          /= User.human_attribute_name("role.#{current_user.role}")

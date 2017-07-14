@@ -1,16 +1,7 @@
 Rails.application.routes.draw do
-  # get 'signup', to: 'users#new'
-  # post 'signup', to: 'users#create'
-  # delete 'delete', to: 'users#destroy'
-  # get 'current_user', to: 'users#show'
   resource :wechat, only: [:show, :create]
-  get 'auth/wechat/callback', to: 'wechat/sessions#create'
-
-  # root 'welcome#index'
-
-  # get 'login', to: 'sessions#new'
-  # post 'login', to: 'sessions#create'
-  # delete 'logout', to: 'sessions#destroy'
+  resources :visitors
+  get 'auth/wechat/callback', to: 'wechat/welcome#create'
 
   namespace :admin do
     get 'login', to: 'sessions#new'
@@ -21,28 +12,30 @@ Rails.application.routes.draw do
     resources :wechat_users
     resources :shared_logs, only: [:index, :create]
     resources :wechat_tags
-    # resources :users, only: [:index, :show, :update] do
-    #   resources :shared_logs, only:[:index]
-    # end
+    resources :users, only: [:index, :show, :update] do
+      resources :shared_logs, only:[:index]
+      # resources :wechat_logs, only: [:index]
+    end
+
+    resources :wechat_tags do
+      member do
+        get :users
+      end
+    end
 
     root 'sessions#new'
   end
 
   namespace :wechat do
     get 'home', to: 'home#index'
-  end
-  # resource :wechat_user
-  resources :wechat_tags do
-    member do
-      get :users
+    get 'user' => 'user#index'
+
+    resources :shared_logs, only: [:create] do
+      resource :user
     end
   end
-  # resources :users, only: [:index, :show, :update] do
-  #   resources :shared_logs, only:[:index]
-  # end
-  # resources :users
-  # resources :wechat_users
-  # resources :wechat_tags, only: [:index, :create]
-  # resources :shared_logs, only: [:index, :create]
+
+  root  'visitors#index'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

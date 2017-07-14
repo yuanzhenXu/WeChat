@@ -8,4 +8,3 @@
 //= require multi-select
 //= require admin/common
 //= require admin/users
-//= require wechat/share.js

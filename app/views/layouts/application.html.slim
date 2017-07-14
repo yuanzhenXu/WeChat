@@ -5,8 +5,8 @@ html
     title Wechat
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
-    = wechat_config_js debug: false, api: %w(onMenuShareTimeline onMenuShareAppMessage chooseImage previewImage uploadImage downloadImage hideMenuItems closeWindow scanQRCode)
+    /= javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
+    /= wechat_config_js debug: false, api: %w(onMenuShareTimeline onMenuShareAppMessage chooseImage previewImage uploadImage downloadImage hideMenuItems closeWindow scanQRCode)
     = csrf_meta_tags
   body
     - flash.each do |message|
@@ -16,8 +16,8 @@ html
     footer
       /= current_user
       /= share_uri
-      = render 'shared_logs/share'
-      = render 'welcome/footer'
+      /= render 'shared_logs/share'
+      /= render 'welcome/footer'
     /  /- if current_user.points.registered.blank?
     /  /  = render 'wechat/base/new_user_dialog'
     /  /  = current_user.add_registered_point

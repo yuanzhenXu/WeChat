@@ -1,10 +1,22 @@
-class Wechat::SessionsController < ApplicationController
+class Wechat::SessionsController < Wechat::BaseController
 
   def create
-    # p ' **' * 20
-    # p auth_hash
+    p ' **' * 20
+    auth_hash = request.env['omniauth.auth']
+    p auth_hash
+    openid = auth_hash.fetch('extra').fetch('raw_info').fetch('openid')
+    @user = User.find_or_initilize_via_wechat(openid)
+    @user.attributes = {
+        nickname: auth_hash.fetch('info').fetch('nickname'),
+        headimagurl: auth_hash.fetch('extra').fetch('raw_info').fetch('headimgurl')
+    }
+
+    @user.save!
+    session[:user_id] = @user.id
+    p 'zzzzzz#'+ @user.id
     begin
       @user = fetch_user
+      p @user.id+ "我们啊啊啊啊"
       log_in @user
       login_in_as_admin @user if @user.admin?
     rescue => e
@@ -35,7 +47,10 @@ class Wechat::SessionsController < ApplicationController
         nickname: auth_hash.fetch('info').fetch('nickname'),
         headimagurl: auth_hash.fetch('extra').fetch('raw_info').fetch('headimgurl')
     }
+
     user.save!
+    session[:user_id] = user.id
+    p 'zzzzzz#'+ user.id
 
     return user
 

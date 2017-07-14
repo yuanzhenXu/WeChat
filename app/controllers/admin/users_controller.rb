@@ -21,9 +21,8 @@ class Admin::UsersController < Admin::BaseController
     end
 
     def show
-      # @user = User.find(params[:id])
-      @user = @current_user
-      # @wechat_tags = @user.wechat_tags.find_by(params[:id])
+      @user = User.find(params[:id])
+
     end
 
     def create
@@ -68,13 +67,14 @@ class Admin::UsersController < Admin::BaseController
       if wechat_agent?
         redirect_to wechat_home_path
       else
-        redirect_to root_path
+        # redirect_to root_path
+        render plain: '哈啊哈'
       end
     end
 
     private
     def user_params
-      params.require(:user).permit(:nickname, :password_digest, :email, :wechat_tags)
+      params.require(:user).permit(:nickname, :password_digest, :email, wechat_tag_ids:[])
     end
 
 end

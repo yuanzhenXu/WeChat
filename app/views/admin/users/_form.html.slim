@@ -8,7 +8,7 @@
             /= f.input :is_admin, wrapper: :horizontal_radio_and_checkboxes
             = f.input :role, collection: User.roles.map{|k, v| [User.human_attribute_name("role.#{k}"), k]}, include_blank: false
             /= f.input :group_id, collection: Group.select_options, include_blank: false
-            = f.input :wechat_tag_ids, collection: WechatTag.select_options, input_html: { multiple: true, class: 'select2'}, hint: raw("如标签不存在，请到 <a href='/wechat_tags'>这里</a> 添加后，刷新页面重新选择")
+            = f.input :wechat_tag_ids, collection: WechatTag.select_options, input_html: { multiple: true, class: 'select2'}, hint: raw("如标签不存在，请到 <a href='/admin/wechat_tags'>这里</a> 添加后，刷新页面重新选择")
             .form-group
               .col-lg-4.col-lg-offset-3
                 = f.submit "提交", class: "btn btn-primary mr20 btn-block"

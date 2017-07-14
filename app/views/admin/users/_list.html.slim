@@ -22,13 +22,13 @@ table.table.table-striped id='links'
       td.text-center
         =link_to admin_user_path(user) do
           = image_tag user.headimageurl, size: '50x50'
-      /- if user.admin?
+        - if user.admin?
           br
           .label.label-primary.m-t
             = User.human_attribute_name("is_admin")
       td= user.openid
       td
-        = link_to user.nickname
+        = link_to user.nickname, admin_user_path(user)
       td= user.mobile
       td
         .label class="label-#{user_role_color(user.role)} m-r-xs"

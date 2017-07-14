@@ -3,13 +3,13 @@ nav.navbar-default.navbar-static-side role='navigation'
     #side-menu.nav.metismenu
       li.nav-header
         .dropdown.profile-element
-          - if logged_in?
+          - if logged_in_as_admin?
             .span
               /= image_tag current_admin.headimageurl, class: 'img-circle', size: '50x50'
             = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
               span.clear
                 span.block.m-t-xs
-                  /strong.font-bold= link_to current_user.nickname, current_user
+                  strong.font-bold= link_to current_admin.nickname, admin_user_path(current_admin)
                   span.text-muted.text-xs.block 管理员
                 .logo-element= "wechat"
               li
@@ -19,7 +19,7 @@ nav.navbar-default.navbar-static-side role='navigation'
                   span.fa.arrow
                 ul.nav.nav-second-level.collapse
                   li
-                    = link_to "用户", users_path
+                    = link_to "用户", admin_users_path
               li
                 = link_to '#' do
                   i.fa.fa-th-large
@@ -27,7 +27,7 @@ nav.navbar-default.navbar-static-side role='navigation'
                   span.fa.arrow
                 ul.nav.nav-second-level.collapse
                   li
-                    = link_to '关注用户', wechat_users_path
+                    = link_to '关注用户', admin_wechat_users_path
               li
                 = link_to '#' do
                   i.fa.fa-wechat
@@ -35,7 +35,7 @@ nav.navbar-default.navbar-static-side role='navigation'
                   span.fa.arrow
                 ul.nav.nav-second-level.collapse
                   li
-                    = link_to '标签', wechat_tags_path
+                    = link_to '标签', admin_wechat_tags_path
               li
                 = link_to '#' do
                   i.fa.fa-wrench
@@ -49,5 +49,5 @@ nav.navbar-default.navbar-static-side role='navigation'
                   span.fa.arrow
                 ul.nav.nav-second-level.collapse
                   li
-                    = link_to '分享', shared_logs_path
+                    = link_to '分享', admin_shared_logs_path
 

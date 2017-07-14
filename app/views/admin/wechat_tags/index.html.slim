@@ -9,8 +9,8 @@ col-lg-4.white-bg
 .wrapper.wrapper-content.animated.fadeInRight
   .ibox.float-e-margins
     .ibox-content
-      /small="Total: #{WechatTag.count}"
-      small="Total: #{@wechat_tags.total_count}"
+      small="Total: #{WechatTag.count}"
+      /small="Total: #{@wechat_tags.total_count}"
 
       table.table.table-striped
         tr
@@ -35,8 +35,8 @@ col-lg-4.white-bg
               = link_to resource.users.size, users_wechat_tag_path(resource)
             td
               .btn-group
-                = link_to '编辑', edit_wechat_tag_path(resource), class: 'btn btn-white btn-sm'
-                = link_to '删除', resource, :method => :delete, :data => { :confirm => 'are you sure?' },
+                = link_to '编辑', edit_admin_wechat_tag_path(resource), class: 'btn btn-white btn-sm'
+                = link_to '删除', [:admin, resource], :method => :delete, :data => { :confirm => 'are you sure?' },
                         class: 'btn btn-white btn-sm'
 
       .pageList.text-center

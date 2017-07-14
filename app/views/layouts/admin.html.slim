@@ -17,8 +17,8 @@ html
     = content_for?(:head) ? yield(:head) : ''
     = stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
-    = wechat_config_js debug: true, api: %w(onMenuShareTimeline onMenuShareAppMessage chooseImage previewImage uploadImage downloadImage hideMenuItems closeWindow scanQRCode)
+    /= javascript_include_tag 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
+    /= wechat_config_js debug: true, api: %w(onMenuShareTimeline onMenuShareAppMessage chooseImage previewImage uploadImage downloadImage hideMenuItems closeWindow scanQRCode)
   / = favicon_link_tag "favicon.png"
   body class="admin_gray_bg" id="admin_#{controller_name}_#{action_name}"
     header

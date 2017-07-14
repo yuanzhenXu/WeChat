@@ -4,9 +4,9 @@
   .tabs-container
     ul.nav.nav-tabs
       li class="#{'active' if %w(edit update).include?(action_name) }"
-        = link_to t('edit'), edit_wechat_tag_path(@wechat_tag)
+        = link_to t('edit'), edit_admin_wechat_tag_path(@wechat_tag)
       li class="#{'active' if action_name == 'users' }"
-        = link_to '用户', users_wechat_tag_path(@wechat_tag)
+        = link_to '用户', admin_wechat_tags_path(@wechat_tag)
     .tab-content
       #tab-detail.tab-pane.active
         .panel-body

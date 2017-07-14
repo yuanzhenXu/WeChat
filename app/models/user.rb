@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include WechatTaggable
 
   validates :nickname, presence: true
+  validates :openid, presence: true, if: 'is_admin = false'
 
   has_secure_password
 

@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
     log_out_admin
     log_out
     flash[:success] = '成功退出'
-    redirect_to login_path
+    redirect_to admin_login_path
   end
 
   # def auth_callback

@@ -1,7 +1,7 @@
 middle-box.text-center.loginscreen.animated.fadeInDown
   div
     h2= "Login"
-    = form_for :session, url: login_path, class: 'm-t', role: 'form' do |f|
+    = form_for :session, url: admin_login_path, class: 'm-t', role: 'form' do |f|
       .form-group
         = f.phone_field :mobile, class: 'form-control', placeholder: User.human_attribute_name(:mobile), required: true
       .form-group

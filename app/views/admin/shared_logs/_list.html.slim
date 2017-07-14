@@ -12,9 +12,9 @@ table.table.table-striped
     - @shared_logs.each do |shared_log|
       tr
         - if @user.blank?
-          td= link_to shared_log.user.try(:id), user_path(shared_log.user_id)
+          td= link_to shared_log.user.try(:id), admin_user_path(shared_log.user_id)
         - if @user.blank?
-          td= link_to shared_log.user.try(:nickname), user_path(shared_log.user_id)
+          td= link_to shared_log.user.try(:nickname), admin_user_path(shared_log.user_id)
         td= shared_log.uri
         td= shared_log.query
         td= shared_log.created_at.localtime.strftime("%Y年%m月%d日 %H:%M")

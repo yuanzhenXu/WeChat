@@ -21,8 +21,8 @@ class Admin::UsersController < Admin::BaseController
     end
 
     def show
-      @user = User.find(params[:id])
-      # @user = @current_user
+      # @user = User.find(params[:id])
+      @user = @current_user
       # @wechat_tags = @user.wechat_tags.find_by(params[:id])
     end
 
@@ -48,7 +48,8 @@ class Admin::UsersController < Admin::BaseController
       @user = User.find(params[:id])
       if @user.update(user_params)
         flash[:notice] = "更新成功"
-        redirect_to  @user
+        redirect_to  admin_users_path
+        # render plain: 'ok'
       else
         render 'edit'
       end
@@ -59,7 +60,16 @@ class Admin::UsersController < Admin::BaseController
       @user = User.find(params[:id])
       @user.destroy
       flash[:success] = "User deleted"
-      redirect_to users_url
+      redirect_to admin_users_url
+    end
+
+    def login_as
+      log_in @user
+      if wechat_agent?
+        redirect_to wechat_home_path
+      else
+        redirect_to root_path
+      end
     end
 
     private

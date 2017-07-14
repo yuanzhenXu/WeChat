@@ -20,7 +20,7 @@ table.table.table-striped id='links'
     tr
       td= user.id
       td.text-center
-        =link_to user_path(user) do
+        =link_to admin_user_path(user) do
           = image_tag user.headimageurl, size: '50x50'
       /- if user.admin?
           br

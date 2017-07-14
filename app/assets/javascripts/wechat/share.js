@@ -18,7 +18,7 @@ function getQueryParams(qs) {
 function saveShareLog(){
     alert($('.share-wrapper').data('user-id'));
   $.post(
-    '/shared_logs',
+    '/wechat/shared_logs',
     {
       uri: window.location.pathname,
       user_id: $('.share-wrapper').data('user-id'),

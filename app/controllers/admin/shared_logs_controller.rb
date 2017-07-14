@@ -2,15 +2,15 @@ class Admin::SharedLogsController < Admin::BaseController
 
   # wechat_api
 
-  def create
-    @shared_log = SharedLog.create(user_id: params[:user_id], query: params[:query], uri: params[:uri])
-
-    render json: { result: true }
-  end
+  # def create
+  #   @shared_log = SharedLog.create(user_id: params[:user_id], query: params[:query], uri: params[:uri])
+  #
+  #   render json: { result: true }
+  # end
 
   def index
-    if params[:id]
-      @user = User.find(params[:id])
+    if params[:user_id]
+      @user = User.find(params[:user_id])
       @shared_logs = @user.shared_logs
     else
       @shared_logs = SharedLog.includes(:user)

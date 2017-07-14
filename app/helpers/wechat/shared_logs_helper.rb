@@ -1,0 +1,2 @@
+module Wechat::SharedLogsHelper
+end

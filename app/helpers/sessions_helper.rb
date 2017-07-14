@@ -65,7 +65,7 @@ module SessionsHelper
       if wechat_agent?
         redirect_to wechat_path
       else
-        redirect_to root_path, alert: "请先登录"
+        redirect_to admin_root_path, alert: "请先登录"
       end
     end
   end
@@ -82,7 +82,7 @@ module SessionsHelper
         redirect_to '/auth/wechat'
       else
         flash[:alert] = "请先登录"
-        redirect_to root_path
+        redirect_to admin_root_path
       end
     end
   end

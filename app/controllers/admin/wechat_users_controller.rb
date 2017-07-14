@@ -19,7 +19,7 @@ class Admin::WechatUsersController < Admin::BaseController
     def destroy
       @wechat_user = WechatUser.find(params[:id])
       @wechat_user.destroy
-      redirect_to wechat_users_path
+      redirect_to admin_wechat_users_path
     end
 
 end

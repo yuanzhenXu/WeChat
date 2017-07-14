@@ -5,9 +5,9 @@ class Admin::BaseController < ApplicationController
   def require_admin
     if current_admin.blank?
       if wechat_agent?
-        redirect_to wechat_path
+        redirect_to wechat_home_path
       else
-        redirect_to root_path, alert: '请先登录'
+        redirect_to admin_root_path, alert: '请先登录'
       end
     end
   end

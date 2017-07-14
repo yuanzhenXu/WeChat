@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'signup', to: 'users#new'
-  post 'signup', to: 'users#create'
+  # get 'signup', to: 'users#new'
+  # post 'signup', to: 'users#create'
   # delete 'delete', to: 'users#destroy'
   # get 'current_user', to: 'users#show'
   resource :wechat, only: [:show, :create]
@@ -15,15 +15,15 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
-    get 'logout', to: 'sessions#destroy'
+    delete 'logout', to: 'sessions#destroy'
 
     resources :users
     resources :wechat_users
     resources :shared_logs, only: [:index, :create]
-    resources :wechat_tags, only: [:index, :create]
-    resources :users, only: [:index, :show, :update] do
-      resources :shared_logs, only:[:index]
-    end
+    resources :wechat_tags
+    # resources :users, only: [:index, :show, :update] do
+    #   resources :shared_logs, only:[:index]
+    # end
 
     root 'sessions#new'
   end
@@ -37,9 +37,9 @@ Rails.application.routes.draw do
       get :users
     end
   end
-  resources :users, only: [:index, :show, :update] do
-    resources :shared_logs, only:[:index]
-  end
+  # resources :users, only: [:index, :show, :update] do
+  #   resources :shared_logs, only:[:index]
+  # end
   # resources :users
   # resources :wechat_users
   # resources :wechat_tags, only: [:index, :create]

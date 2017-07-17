@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   # has_many  :wechat_tags, dependent: :destroy
   has_many  :shared_logs, dependent: :destroy
+  has_many  :view_logs
+
   # has_many  :wechat_tags, through: :user_wechat_tags, dependent: :destroy
 
   enum role: [:'土豆', '香蕉', '小黄人']

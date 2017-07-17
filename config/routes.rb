@@ -10,11 +10,12 @@ Rails.application.routes.draw do
 
     resources :users
     resources :wechat_users
+    resources :view_logs
     resources :shared_logs, only: [:index, :create]
     resources :wechat_tags
     resources :users, only: [:index, :show, :update] do
       resources :shared_logs, only:[:index]
-      # resources :wechat_logs, only: [:index]
+      resources :wiew_logs, only: [:index]
     end
 
     resources :wechat_tags do

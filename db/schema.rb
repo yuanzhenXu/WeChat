@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711103827) do
+ActiveRecord::Schema.define(version: 20170717030641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 20170711103827) do
     t.bigint "wechat_tag_id"
     t.index ["user_id"], name: "index_users_wechat_tags_on_user_id"
     t.index ["wechat_tag_id"], name: "index_users_wechat_tags_on_wechat_tag_id"
+  end
+
+  create_table "view_logs", force: :cascade do |t|
+    t.integer "shared_user_id"
+    t.integer "viewer_id"
+    t.string "uri"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shared_user_id"], name: "index_view_logs_on_shared_user_id"
+    t.index ["viewer_id"], name: "index_view_logs_on_viewer_id"
   end
 
   create_table "wechat_sessions", force: :cascade do |t|

@@ -4,20 +4,13 @@ class WechatsController < ApplicationController
   layout 'wechat'
   wechat_responder
 
-  def apply_new
-    wechat_oauth2 do |userid|
-      @current_user = User.find_by(wechat_userid: userid)
-      @apply = Apply.new
-      @apply.user_id = @current_user.id
-    end
-  end
 
   #邀请成员关注
   # def inivite_user(user)
   #   @user = Wechat.api.invite_user(user.id)
   # end
   #
-  # #给用户发消息
+  #给用户发消息
   # def send_message(openid, message)
   #   @user.openid = Wechat.api.user(openid)
   #   # message = Wechat.api.message_send(@user.openid,message)
@@ -46,11 +39,12 @@ class WechatsController < ApplicationController
 
   # 当用户加关注
   on :event, with: 'subscribe' do |request|
-    request.reply.news([welcome_message]) do |article, n|
+    # save_wechat_log(request.message_hash)
+    request.reply.text "User #{request[:FromUserName]} subscribe now"
+    request.reply.news(welcome_message) do |article, n, index|
       article.item title: n[:title], description: nil, pic_url: n[:pic_url], url: n[:url]
     end
     p 'hello world*********'
-    # request.reply.text "User #{request[:FromUserName]} subscribe now"
     if WechatUser.exists?(openid:request[:FromUserName])
       @wechat_user.openid = request[:FromUserName]
       @wechat_user.event = 'subscribe'
@@ -70,13 +64,23 @@ class WechatsController < ApplicationController
 
   end
 
+  # def save_wechat_log(message_hash)
+  #   openid = message_hash[:FromUserName]
+  #   ticket = message_hash[:Ticket]
+  #   event_key = message_hash[:Event_key]
+  #   user = fetch_user(:openid)
+  #   created_at = Time.at(message_hash[:CreateTime].to_i)
+  #   return user
+  #
+  # end
+
 
   def welcome_message
     {
      :title => "欢迎你",
-     :content => "未完待续..........",
-     :pic_url => "",
-     :url => wechat_url
+     :content => '未完待续',
+     :pic_url => 'http://www.baidu.com/img/bdlogo.gif',
+     :url => wechat_home_url
 
     }
   end
@@ -168,28 +172,28 @@ class WechatsController < ApplicationController
 
   # 当无任何responder处理用户信息时,使用这个responder处理
   on :fallback, respond: '欢迎你'
-  # template = YAML.load(File.read(template_yaml_path))
+  # template = YAML.load(File.read(config/articles.yml))
   # Wechat.api.template_message_send Wechat::Message.to(openid).template(template['template'])
-  #
+
   # ActiveSupport::Notifications.subscribe('wechat.responder.after_create') do |name, started, finished, unique_id, data|
   #   WechatLog.create request: data[:request], response: data[:response]
   # end
 
   # 获取用户的nickname,headimageurl
-  def fetch_user(openid)
-    begin
-    _hash = wechat.user(openid)
-    user = User.find_or_initilize_via_wechat(openid)
-    user.attribute = {
-        nickname: _hash['nickename'].presence || user.nickname,
-        headimageurl: _hash['headimgurl'].presence || user.headimageurl
-    }
-
-    rescue
-    _hash = {'openid': openid}
-    user = User.find_or_initialize_via_wechat(openid)
-    end
-    user.save!
-    return user
-  end
+  # def fetch_user(openid)
+  #   begin
+  #   _hash = wechat.user(openid)
+  #   user = User.find_or_initilize_via_wechat(openid)
+  #   user.attribute = {
+  #       nickname: _hash['nickename'].presence || user.nickname,
+  #       headimageurl: _hash['headimgurl'].presence || user.headimageurl
+  #   }
+  #
+  #   rescue
+  #   _hash = {'openid': openid}
+  #   user = User.find_or_initialize_via_wechat(openid)
+  #   end
+  #   user.save!
+  #   return user
+  # end
 end

@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717030641) do
+ActiveRecord::Schema.define(version: 20170718063548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "faqs", force: :cascade do |t|
+    t.string "title"
+    t.integer "position"
+    t.text "content"
+    t.boolean "is_online", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["is_online"], name: "index_faqs_on_is_online"
+    t.index ["position"], name: "index_faqs_on_position"
+  end
 
   create_table "shared_logs", force: :cascade do |t|
     t.integer "user_id"

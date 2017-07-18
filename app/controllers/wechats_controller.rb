@@ -39,11 +39,7 @@ class WechatsController < ApplicationController
 
   # 当用户加关注
   on :event, with: 'subscribe' do |request|
-    # save_wechat_log(request.message_hash)
     request.reply.text "User #{request[:FromUserName]} subscribe now"
-    request.reply.news(welcome_message) do |article, n, index|
-      article.item title: n[:title], description: nil, pic_url: n[:pic_url], url: n[:url]
-    end
     p 'hello world*********'
     if WechatUser.exists?(openid:request[:FromUserName])
       @wechat_user.openid = request[:FromUserName]
@@ -59,8 +55,8 @@ class WechatsController < ApplicationController
     end
 
 
-    p '#######'
-    p request
+    # p '#######'
+    # p request
 
   end
 

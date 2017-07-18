@@ -4,6 +4,8 @@
 //= require bootstrap-sprockets
 //= require admin/plugins/jquery.metisMenu
 //= require admin/plugins/bootstrap-editable
+//= require umeditor/umeditor.config
+//= require umeditor/umeditor.js
 //= require select2
 //= require multi-select
 //= require admin/common

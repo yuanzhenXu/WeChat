@@ -1,0 +1,15 @@
+= simple_form_for([:admin, @faq], html: {class: 'form-horizontal faq'},  wrapper: :horizontal_form) do |f|
+  /- if @faq.persisted?
+  /= f.input :position do
+  /  p.form-control-static= @faq.position
+  = f.input :title
+  = f.input :content do
+    .hidden
+      = f.text_area :content, class: 'umeditor-textarea'
+    script id='umeditor-content' type='text/plain' style='width:100%;height:300px;' data-name='faq[content]'
+      = raw @faq.content
+  = f.input :is_online, as: :boolean, wrapper: :horizontal_boolean
+  .form-group
+    .col-md-offset-3.col-md-9
+      = f.submit 'save', class: 'btn btn-primary  btn-w-m'
+/h1 "hh"

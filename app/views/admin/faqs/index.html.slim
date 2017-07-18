@@ -1,0 +1,32 @@
+= render 'admin/base/subnav'
+.wrapper.wrapper-content.animated.fadeInRight
+  .ibox.float-e-margins
+    .ibox-content
+      small
+        | Total:
+        = @faqs.total_count
+
+      table.table.table-striped
+        tr
+          th ID
+          th= Faq.human_attribute_name(:position)
+          th= Faq.human_attribute_name(:title)
+          th= Faq.human_attribute_name(:is_online)
+          th= link_to '添加', {controller: controller_name, action: :new}, class: 'btn btn-sm btn-primary'
+
+        - @faqs.each do |faq|
+          tr
+            td= faq.id
+            td= faq.position
+            td= faq.title
+            td
+              - if faq.is_online
+                i.fa.fa-check-square-o
+            td
+              .btn-group
+                /= render 'admin/base/move', resource: faq
+                = link_to 'edit', edit_admin_faq_path(faq), class: 'btn btn-white btn-sm'
+                = link_to 'destroy', [:admin, faq], :method => :delete, :data => { :confirm => 'are you sure ?' }, class: 'btn btn-white btn-sm'
+
+      .pageList.text-center
+        = paginate @faqs

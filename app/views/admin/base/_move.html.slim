@@ -1,0 +1,12 @@
+= link_to [:move_to_top, :admin, resource], class: 'btn btn-white btn-sm', method: :post do
+  i.fa.fa-angle-double-up
+  | &nbsp;TOP
+= link_to [:move_higher, :admin, resource], class: 'btn btn-white btn-sm', method: :post do
+  i.fa.fa-angle-up
+  | &nbsp;Up
+= link_to [:move_lower, :admin, resource], class: 'btn btn-white btn-sm', method: :post do
+  i.fa.fa-angle-down
+  | &nbsp;Down
+= link_to [:move_to_bottom, :admin, resource], class: 'btn btn-white btn-sm', method: :post do
+  i.fa.fa-angle-double-down
+  | &nbsp;Bottom

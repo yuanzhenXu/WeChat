@@ -25,9 +25,9 @@ $ ->
 #  window.UMEDITOR_CONFIG.imagePath = ''
 #  window.UMEDITOR_CONFIG.UMEDITOR_HOME_URL = '/assets/umeditor/'
 
-#  window.um = UM.getEditor('umeditor-content',
-#    textarea: $('#umeditor-content').data('name')
-#  )
+  window.um = UM.getEditor('umeditor-content',
+    textarea: $('#umeditor-content').data('name')
+  )
 
   $('.chosen-select, .select2').select2()
 

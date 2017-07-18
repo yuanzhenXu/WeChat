@@ -9,7 +9,14 @@ Rails.application.routes.draw do
     delete 'logout', to: 'sessions#destroy'
 
     resources :users
-    resources :faqs
+    resources :faqs do
+      member do
+        post :move_to_top
+        post :move_to_bottom
+        post :move_higher
+        post :move_lower
+      end
+    end
     resources :wechat_users
     resources :view_logs
     resources :shared_logs, only: [:index, :create]

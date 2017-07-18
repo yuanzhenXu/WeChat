@@ -3,6 +3,7 @@ class Admin::FaqsController < Admin::BaseController
 
   def index
     @faqs = Faq.all.order_by_position.page(params[:page]||1).per(20)
+    # @faqs = @faqs.order('created_at desc').page(params[:page]||1).per(20)
   end
 
   def new

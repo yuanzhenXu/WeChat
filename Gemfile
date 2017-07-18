@@ -23,6 +23,7 @@ gem 'jquery-rails'
 gem 'multi-select-rails'
 gem 'select2-rails'
 gem 'jquery-ui-rails'
+gem 'acts_as_list'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

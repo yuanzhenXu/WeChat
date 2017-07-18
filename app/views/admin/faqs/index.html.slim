@@ -24,7 +24,7 @@
                 i.fa.fa-check-square-o
             td
               .btn-group
-                /= render 'admin/base/move', resource: faq
+                = render 'admin/base/move', resource: faq
                 = link_to 'edit', edit_admin_faq_path(faq), class: 'btn btn-white btn-sm'
                 = link_to 'destroy', [:admin, faq], :method => :delete, :data => { :confirm => 'are you sure ?' }, class: 'btn btn-white btn-sm'
 

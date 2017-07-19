@@ -13,6 +13,7 @@ class Admin::FaqsController < Admin::BaseController
   def edit
 
   end
+
   def create
     @faq = Faq.new(faq_params)
     if @faq.save

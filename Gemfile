@@ -19,11 +19,13 @@ gem 'bootstrap-sass'
 gem 'omniauth-wechat-oauth2'
 gem 'font-awesome-sass'
 gem 'kaminari'
+gem 'china_city'
 gem 'jquery-rails'
 gem 'multi-select-rails'
 gem 'select2-rails'
 gem 'jquery-ui-rails'
 gem 'acts_as_list'
+gem 'acts_as_paranoid', github: 'ActsAsParanoid/acts_as_paranoid'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

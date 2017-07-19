@@ -24,5 +24,26 @@ class Admin::BaseController < ApplicationController
     @current_admin = user
   end
 
+  [:to_top, :to_bottom, :higher, :lower].each do |action|
+    define_method "move_#{action}" do
+      moveable action
+    end
+  end
+
+  def moveable action
+    resources = controller_name.classify.constantize.find(params[:id])
+    resources.send("move_#{action}") if resources
+    redirect_back(fallback_location: admin_root_path)
+
+  end
+
+  def update_positions
+    ActiveRecord::Base.transaction do
+      params[:position].each do |id, index|
+        controller_name.classify.constantize.find(id).set_list_position(index)
+      end
+    end
+  end
+
 end
 

@@ -1,0 +1,29 @@
+.page.pb60
+  .top-bar
+    .breadcrumb
+      = link_to wechat_home_path, class: 'item' do
+        span.icon.icon-home
+      = link_to wechat_user_path, class: 'item' do
+        | 个人中心
+      .item 收货地址
+
+    = link_to new_admin_address_path, class: 'button btn-radius btn-orange-line' do
+      span.icon.icon-add
+      | 新建地址
+
+  .address-list
+    - @addresses.each do |address|
+      = link_to edit_admin_address_path(address), class: 'item right-arr-item default' do
+        p
+          strong 收件人：
+          /= address.name
+        p
+          strong 手机号码：
+          /= address.phone
+        p
+          strong 收货地址：
+          = address.display
+        - if address.is_default
+          .default-icon
+            .icon.icon-location
+            p 默认地址

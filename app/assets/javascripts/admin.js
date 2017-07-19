@@ -8,5 +8,6 @@
 //= require umeditor/umeditor.js
 //= require select2
 //= require multi-select
+//= require shared/china_city
 //= require admin/common
 //= require admin/users

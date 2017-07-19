@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :visitors
   get 'auth/wechat/callback', to: 'wechat/welcome#create'
 
+  mount ChinaCity::Engine => '/china_city'
+
   namespace :admin do
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
@@ -19,6 +21,7 @@ Rails.application.routes.draw do
     end
     resources :wechat_users
     resources :view_logs
+    resources :addresses
     resources :shared_logs, only: [:index, :create]
     resources :wechat_tags
     resources :users, only: [:index, :show, :update] do

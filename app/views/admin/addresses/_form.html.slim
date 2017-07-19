@@ -1,0 +1,40 @@
+.page.pb60
+  = form_for [:admin, @address], html: { class: 'default-form', id: 'address_edit_form' } do |f|
+    /.form-group
+    /  .form-input
+    /    = f.text_field :name, class: 'form-control', placeholder: '请输入收货人姓名'
+    /.form-group
+    /  .form-input
+    /    = f.telephone_field :phone, class: 'form-control', placeholder: '请输入收货人手机号码'
+    .mt10
+      .city-group
+        .form-group.form-select
+          select.form-control.city-select name='address[province_code]'
+            option value='-1' 请选择省份
+            = options_for_select(ChinaCity.list, @address.province_code)
+        .form-group.form-select
+          select.form-control.city-select name='address[city_code]'
+            option value='-1' 请选择城市
+            - if @address.province_code.present?
+              = options_for_select(ChinaCity.list(@address.province_code), @address.city_code)
+        .form-group.form-select
+          select.form-control.city-select name='address[district_code]'
+            option value='-1' 请选择地区
+            - if @address.city_code.present?
+              = options_for_select(ChinaCity.list(@address.city_code), @address.district_code)
+
+      .form-group
+        .form-input
+          = f.text_area :street, class: 'form-control', placeholder: '请输入详细地址'
+    .mt10
+      label.set-address-default#set_default_address
+        .pull-left 设为默认地址
+        = f.check_box :is_default, class: 'checkbox pull-right'
+
+    - if @address.persisted?
+      .clearfix
+        .remove-address#remove_address data-url=url_for([:admin, @order, @address]) 删除该地址
+
+    .btn-group.foot
+      .item
+        = submit_tag '保存地址', class: 'button btn-block btn-radius btn-cyan', id: 'address_edit_submit'

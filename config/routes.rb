@@ -42,10 +42,13 @@ Rails.application.routes.draw do
     get 'home', to: 'home#index'
     get 'user' => 'user#index'
 
+    resources :addresses
+
     resources :shared_logs, only: [:create] do
       resource :user
     end
   end
+
 
   root  'visitors#index'
 

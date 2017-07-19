@@ -11,7 +11,7 @@ class Address < ApplicationRecord
   def fix_china_city
     self.province_code = '' if self.province_code == '-1'
     self.city_code= '' if self.city_code == '-1'
-    self.district_code = '' if self.district_code == '-1'
+    # self.district_code = '' if self.district_code == '-1'
     return true
   end
 

@@ -9,5 +9,8 @@
         p
           | 角色:
           = User.human_attribute_name("role.#{current_user.role}")
+  = link_to wechat_addresses_path, class: 'item' do
+    /.icon = image_tag 'wechat/user/icon_location.png', alt: ''
+    .title 收货地址管理
 .user-column
   =link_to '返回', wechat_home_path

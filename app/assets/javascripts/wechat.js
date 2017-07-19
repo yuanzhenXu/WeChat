@@ -9,3 +9,5 @@
 //= require wechat/home
 //= require wechat/user
 //= require wechat/share
+//= require wechat/addresses
+//= require shared/china_city

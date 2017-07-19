@@ -1,5 +1,5 @@
 .page.pb60
-  = form_for [:admin, @address], html: { class: 'default-form', id: 'address_edit_form' } do |f|
+  = form_for [:wechat, @address], html: { class: 'default-form', id: 'address_edit_form' } do |f|
     .form-group
       .form-input
         = f.text_field :name, class: 'form-control', placeholder: '请输入收货人姓名'
@@ -31,9 +31,9 @@
         .pull-left 设为默认地址
         = f.check_box :is_default, class: 'checkbox pull-right'
 
-    - if @address.persisted?
-      .clearfix
-        .remove-address#remove_address data-url=url_for([:admin, @order, @address]) 删除该地址
+    /- if @address.persisted?
+    /  .clearfix
+    /    .remove-address#remove_address data-url=url_for([:wechat, @order, @address]) 删除该地址
 
     .btn-group.foot
       .item
